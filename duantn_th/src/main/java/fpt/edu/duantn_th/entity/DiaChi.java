@@ -1,0 +1,36 @@
+package fpt.edu.duantn_th.entity;
+
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.UUID;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "diachi")
+public class DiaChi {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+
+    private UUID iddiachi;
+    private String diachi;
+    private String xa;
+    private String huyen;
+    private String tinh;
+    private String quocgia;
+    private Long trangthai;
+
+    @ManyToOne
+    @JoinColumn(name = "idtk")
+    User users;
+
+
+}

@@ -1,11 +1,9 @@
 package fpt.edu.duantn_th.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -14,18 +12,28 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "image")
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
 
+
+    @Column(name = "idimage")
     private UUID idimage;
+
+    @Column(name = "tenimage")
     private String tenimage;
+
+    @Column(name = "trangthai")
     private Long trangthai;
+
+    @Column(name = "isdefault")
     private Boolean isdefault;
 
     @ManyToOne
     @JoinColumn(name = "idctsp")
+    @JsonBackReference
     ChiTietSanPham ctsp;
 
 }

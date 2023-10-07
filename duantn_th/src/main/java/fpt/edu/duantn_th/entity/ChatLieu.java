@@ -1,11 +1,9 @@
 package fpt.edu.duantn_th.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,18 +13,26 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "chatlieu")
 public class ChatLieu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
 
+    @Column(name = "idchatlieu")
     private UUID idchatlieu;
 
+    @Column(name = "tenchatlieu")
     private String tenchatlieu;
+
+    @Column(name = "mota")
     private String mota;
+
+    @Column(name = "trangthai")
     private Long trangthai;
 
 
-    @OneToMany(mappedBy = "chatlieu")
+    @OneToMany(mappedBy = "chatlieu", fetch = FetchType.LAZY)
+    @JsonManagedReference
     List<ChiTietSanPham> ctsp;
 }

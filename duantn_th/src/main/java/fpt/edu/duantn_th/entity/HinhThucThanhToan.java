@@ -1,11 +1,9 @@
 package fpt.edu.duantn_th.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
@@ -15,31 +13,42 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "hinhthucthanhtoan")
 public class HinhThucThanhToan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
 
+    @Column(name = "idhtthanhtoan")
     private UUID idhtthanhtoan;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "NgayThanhToan")
+    @Column(name = "ngaythanhtoan")
     Date ngaythanhtoan = new Date();
 
+    @Column(name = "tongtien")
     private Double tongtien;
+
+    @Column(name = "phuongthucthanhtoan")
     private Long phuongthucthanhtoan;
+
+    @Column(name = "ghichu")
     private String ghichu;
+
+    @Column(name = "trangthai")
     private Long trangthai;
 
     //Máp với đơn hàng N-1
     @ManyToOne
     @JoinColumn(name = "iddonhang")
+    @JsonBackReference
     DonHang donhang;
 
     //Máp với users N-1
     @ManyToOne
     @JoinColumn(name = "idtk")
+    @JsonBackReference
     User users;
 
 }

@@ -1,11 +1,9 @@
 package fpt.edu.duantn_th.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,17 +12,24 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "chucvu")
 public class ChucVu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+    @Column(name = "idtk")
     private Long idtk;
+
+    @Column(name = "tenchucvu")
     private String tenchucvu;
+
+    @Column(name = "trangthai")
     private Long trangthai;
 
-    @OneToMany(mappedBy = "chucvu")
+    @OneToMany(mappedBy = "chucvu", fetch = FetchType.LAZY)
+    @JsonManagedReference
     List<User> users;
 
 }

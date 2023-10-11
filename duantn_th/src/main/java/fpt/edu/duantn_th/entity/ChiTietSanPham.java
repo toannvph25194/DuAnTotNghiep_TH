@@ -21,7 +21,7 @@ public class ChiTietSanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
 
-    @Column(name = "idctsp")
+    @Column(name = "id")
     private UUID idctsp;
 
     @Column(name = "gianhap")

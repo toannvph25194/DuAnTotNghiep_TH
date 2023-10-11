@@ -19,8 +19,8 @@ public class ChucVu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "idtk")
-    private Long idtk;
+    @Column(name = "id")
+    private Long idchucvu;
 
     @Column(name = "tenchucvu")
     private String tenchucvu;

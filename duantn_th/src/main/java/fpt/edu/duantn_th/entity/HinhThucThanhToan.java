@@ -20,7 +20,7 @@ public class HinhThucThanhToan {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
 
-    @Column(name = "idhtthanhtoan")
+    @Column(name = "id")
     private UUID idhtthanhtoan;
 
     @Temporal(TemporalType.DATE)

@@ -20,7 +20,7 @@ public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
 
-    @Column(name = "idsize")
+    @Column(name = "id")
     private UUID idsize;
 
     @Column(name = "tensize")

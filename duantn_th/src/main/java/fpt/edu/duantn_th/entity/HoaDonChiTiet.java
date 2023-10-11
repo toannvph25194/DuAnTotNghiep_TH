@@ -19,7 +19,7 @@ public class HoaDonChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
 
-    @Column(name = "idhoadonct")
+    @Column(name = "id")
     private UUID idhoadonct;
 
     @Column(name = "SoLuong")
@@ -36,7 +36,7 @@ public class HoaDonChiTiet {
 
     //Máp với spct N-1
     @ManyToOne
-    @JoinColumn(name = "idspct")
+    @JoinColumn(name = "idctsp")
     @JsonBackReference
     ChiTietSanPham ctsp;
 

@@ -1,0 +1,36 @@
+package fpt.edu.duantn_th.controller;
+
+
+import fpt.edu.duantn_th.entity.ChucVu;
+import fpt.edu.duantn_th.service.Impl.ChucVuServiceimpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/chuc-vu")
+public class ChucVuController {
+
+    @Autowired
+    ChucVuServiceimpl chucVuServiceimpl;
+
+    @GetMapping("/show")
+    public ResponseEntity<?> getAllChucvu(){
+        return ResponseEntity.ok(chucVuServiceimpl.getAllchucvu());
+    }
+
+    @DeleteMapping("/delete/chuc-vu/{idchucvu}")
+    public ResponseEntity<?> deletechucvu(@PathVariable("idchucvu") Long idcv){
+        return ResponseEntity.ok(chucVuServiceimpl.deletechucvu(idcv));
+    }
+
+    @PutMapping("/update/chuc-vu/{idchucvu}")
+    public ResponseEntity<?> updatechucvu( @RequestBody ChucVu cv ,@PathVariable("idchucvu") Long idcv){
+        return ResponseEntity.ok(chucVuServiceimpl.updatechucvu(cv,idcv));
+    }
+
+    @PostMapping("/add/chuc-vu")
+    public ResponseEntity<?> addchucvu(@RequestBody ChucVu cv){
+        return ResponseEntity.ok(chucVuServiceimpl.addchucvu(cv));
+    }
+}

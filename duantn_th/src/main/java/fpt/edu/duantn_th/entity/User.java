@@ -16,13 +16,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "users")
+@Table(name = "taikhoan")
 public class User {
 
     @Id
     @GeneratedValue( strategy = GenerationType.UUID)
 
-    @Column(name = "idtk")
+    @Column(name = "id")
     private UUID idtk;
 
     @Column(name = "ten")

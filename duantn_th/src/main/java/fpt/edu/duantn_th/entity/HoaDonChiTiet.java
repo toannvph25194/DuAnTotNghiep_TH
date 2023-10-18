@@ -22,8 +22,8 @@ public class HoaDonChiTiet {
     @Column(name = "id")
     private UUID idhoadonct;
 
-    @Column(name = "SoLuong")
-    private Double SoLuong;
+    @Column(name = "soluong")
+    private Double soluong;
 
     @Column(name = "dongia")
     private Double dongia;

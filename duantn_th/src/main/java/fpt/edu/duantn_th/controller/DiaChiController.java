@@ -17,7 +17,7 @@ public class DiaChiController {
     @Autowired
     DiaChiServiceImpl service;
 
-    //api Load Table
+    // TODO Load diachi
     @GetMapping("/show")
     public ResponseEntity<?> getALlDiaChi(){
         return ResponseEntity.ok(service.getALLDiaChi());

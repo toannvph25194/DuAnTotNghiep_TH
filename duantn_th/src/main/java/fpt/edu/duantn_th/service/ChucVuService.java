@@ -6,16 +6,16 @@ import java.util.List;
 
 public interface ChucVuService {
 
-    // show
+    // show CV
     public List<ChucVu> getAllchucvu();
 
-    // delete
+    // delete CV
     ChucVu deletechucvu(Long idcv);
 
-    //add
+    //add CV
     ChucVu addchucvu(ChucVu cv);
 
-    //update
+    //update CV
     ChucVu updatechucvu(ChucVu cv , Long idcv);
 
 }

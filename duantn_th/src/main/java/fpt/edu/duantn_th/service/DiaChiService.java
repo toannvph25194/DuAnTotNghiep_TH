@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface DiaChiService {
 
+    // load địa chỉ
     public List<DiaChi> getALLDiaChi();
 }

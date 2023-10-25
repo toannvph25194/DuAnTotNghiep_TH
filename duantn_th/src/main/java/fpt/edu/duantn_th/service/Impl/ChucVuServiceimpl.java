@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @Service
-public class ChucVuServiceimpl implements ChucVuService {
+public class ChucVuServiceImpl implements ChucVuService {
 
     @Autowired
     ChucVuRepository repository;

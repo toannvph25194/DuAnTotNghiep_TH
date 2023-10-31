@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +40,9 @@ public class SanPham {
     @Column( name = "trangthai")
     private Long trangthai;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "ngaythemsp")
+    Date ngaythemsp = new Date();
 
 
     // Máp SPCT 1-N

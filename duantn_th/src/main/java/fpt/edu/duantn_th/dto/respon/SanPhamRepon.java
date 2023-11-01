@@ -5,9 +5,16 @@ import java.util.UUID;
 public interface SanPhamRepon {
 
     UUID getId();
-    String getTensp();
+    String getTenimage();
+    String getmasp();
+    String gettensp();
+    Boolean gettheloai();
+    String gettenmausac();
     String gettendanhmuc();
     Double getgiaban();
-    String gettenimage();
+    Long getsoluongton();
+    String gettensize();
+    String gettenchatlieu();
+
 
 }

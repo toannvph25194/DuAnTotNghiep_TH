@@ -8,22 +8,4 @@ import java.util.UUID;
 
 public interface ChiTietSanPhamService {
 
-    // Load ctsp respon
-    List<ChiTietSPRepon> getALlCTSPRepon();
-
-    // Load ctsp bình thường
-    List<ChiTietSanPham> getALlCTSP();
-
-    // Detail ctsp respon
-
-    List<ChiTietSPRepon> getByIdCTSP(UUID idctsp);
-
-    // FindById Danh Mục
-    List<ChiTietSPRepon> findByIdDM(UUID iddm);
-
-    // FindById Size
-    List<ChiTietSPRepon> findByIdSize(UUID idsize);
-
-    // FindByName Sản Phẩm
-    List<ChiTietSPRepon> findByNameSP(String tensp);
 }

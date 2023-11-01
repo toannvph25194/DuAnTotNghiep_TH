@@ -11,6 +11,7 @@ public interface ChiTietSPRepon {
     String gettensp();
     Boolean gettheloai();
     String gettenmausac();
+    String gettendanhmuc();
     Double getgiaban();
     Long getsoluongton();
     String gettensize();

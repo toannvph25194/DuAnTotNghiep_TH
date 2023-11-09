@@ -20,7 +20,7 @@ public class GioHangController {
 
     //TODO tạo mới 1 giỏ hàng
     @PostMapping("/add")
-    public ResponseEntity<?> addGH( GioHang gh , @RequestParam("idtk") UUID idtk){
+    public ResponseEntity<?> addGH(GioHang gh , @RequestParam("idtk") UUID idtk){
         try {
             return ResponseEntity.ok(gioHangService.createGioHang(gh,idtk));
         }catch (Exception ex){

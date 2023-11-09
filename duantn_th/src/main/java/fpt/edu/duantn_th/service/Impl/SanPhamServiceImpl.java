@@ -7,6 +7,8 @@ import fpt.edu.duantn_th.entity.SanPham;
 import fpt.edu.duantn_th.repository.SanPhamRepository;
 import fpt.edu.duantn_th.service.SanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,11 @@ public class SanPhamServiceImpl implements SanPhamService {
 
 
     @Override
+    public Page<SanPhamRepon> getALlPTSPRepon(Pageable pageable) {
+        return sanPhamrepository.getAllPTSP(pageable);
+    }
+
+    @Override
     public List<SanPhamRepon> getALlSPRepon() {
         return sanPhamrepository.getAllSP();
     }
@@ -33,6 +40,11 @@ public class SanPhamServiceImpl implements SanPhamService {
     @Override
     public List<SanPhamRepon> getALlSPNuRepon() {
         return sanPhamrepository.getAllSPNu();
+    }
+
+    @Override
+    public List<SanPhamRepon> getALlSPNewRepon() {
+        return sanPhamrepository.getAllSPNew();
     }
 
     @Override

@@ -27,8 +27,8 @@ public class HinhThucThanhToan {
     @Column(name = "ngaythanhtoan")
     Date ngaythanhtoan = new Date();
 
-    @Column(name = "tongtien")
-    private Double tongtien;
+    @Column(name = "sotientra")
+    private Double sotientra;
 
     @Column(name = "phuongthucthanhtoan")
     private Long phuongthucthanhtoan;

@@ -4,22 +4,30 @@ import fpt.edu.duantn_th.dto.respon.ChiTietSPRepon;
 import fpt.edu.duantn_th.dto.respon.SanPhamRepon;
 import fpt.edu.duantn_th.entity.ChiTietSanPham;
 import fpt.edu.duantn_th.entity.SanPham;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface SanPhamService {
 
-    // Load ctsp respon
+    // Load PT sp respon
+    Page<SanPhamRepon> getALlPTSPRepon(Pageable pageable);
+
+    // Load sp respon
     List<SanPhamRepon> getALlSPRepon();
 
-    // Load ctsp respon
+    // Load sp respon
     List<SanPhamRepon> getALlSPNamRepon();
 
-    // Load ctsp respon
+    // Load sp respon
     List<SanPhamRepon> getALlSPNuRepon();
 
-    // Detail ctsp respon
+    // Load sp mới respon
+    List<SanPhamRepon> getALlSPNewRepon();
+
+    // Detail sp respon
 
     List<SanPhamRepon> getByIdSP(UUID idsp);
 

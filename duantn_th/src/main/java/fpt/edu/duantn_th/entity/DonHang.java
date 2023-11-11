@@ -77,7 +77,7 @@ public class DonHang {
     private Double thanhtien;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
     @Column(name = "qrcode")
     private String qrcode;

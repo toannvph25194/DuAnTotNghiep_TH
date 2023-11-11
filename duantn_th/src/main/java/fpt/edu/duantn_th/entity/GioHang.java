@@ -39,7 +39,7 @@ public class GioHang {
     private String ghichu;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
 
     // Máp với giỏ hàng ct 1-N

@@ -25,14 +25,8 @@ public class User {
     @Column(name = "id")
     private UUID idtk;
 
-    @Column(name = "ten")
-    private String ten;
-
-    @Column(name = "tendem")
-    private String tendem;
-
-    @Column(name = "ho")
-    private String ho;
+    @Column(name = "hovaten")
+    private String hovaten;
 
     @Column(name = "email")
     private String email;
@@ -55,7 +49,8 @@ public class User {
     @Column(name = "trangthai")
     private Long trangthai;
 
-
+    @Column(name = "sodienthoai")
+    private String sodienthoai;
 
     // Máp với địa chỉ 1-N
     @OneToMany(mappedBy = "users" , fetch = FetchType.LAZY)
@@ -88,6 +83,5 @@ public class User {
     @JoinColumn( name = "idchucvu")
     @JsonBackReference
     ChucVu chucvu;
-
 
 }

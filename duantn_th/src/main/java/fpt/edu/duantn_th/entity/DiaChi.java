@@ -38,7 +38,7 @@ public class DiaChi {
     private String quocgia;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
     @ManyToOne
     @JoinColumn(name = "idtk")

@@ -23,7 +23,7 @@ public class HoaDonChiTiet {
     private UUID idhoadonct;
 
     @Column(name = "soluong")
-    private Double soluong;
+    private Integer soluong;
 
     @Column(name = "dongia")
     private Double dongia;
@@ -32,7 +32,7 @@ public class HoaDonChiTiet {
     private Double dongiakhigiam;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
     //Máp với spct N-1
     @ManyToOne

@@ -23,7 +23,7 @@ public class GioHangChiTiet {
     private UUID idgiohangct;
 
     @Column(name = "soluong")
-    private Long soluong;
+    private Integer soluong;
 
     @Column(name = "dongia")
     private Double dongia;
@@ -32,7 +32,7 @@ public class GioHangChiTiet {
     private Double dongiakhigiam;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
     // Máp với ctsp N-1
     @ManyToOne

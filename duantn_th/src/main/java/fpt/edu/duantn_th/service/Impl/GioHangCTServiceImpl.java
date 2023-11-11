@@ -1,6 +1,8 @@
 package fpt.edu.duantn_th.service.Impl;
 
+import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
 import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
+import fpt.edu.duantn_th.dto.respon.TongSoTienRepo;
 import fpt.edu.duantn_th.entity.ChiTietSanPham;
 import fpt.edu.duantn_th.entity.GioHang;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
@@ -34,7 +36,7 @@ public class GioHangCTServiceImpl implements GioHangCTService {
     }
 
     @Override
-    public void addSPVaoGioHangCT( UUID idgiohang, UUID idctsp, Long soluong) {
+    public void addSPVaoGioHangCT( UUID idgiohang, UUID idctsp, Integer soluong) {
 
         // kiểm tra sản phẩm đã có trong giỏ hàng chi tiết chưa
         GioHangChiTiet ghct = gioHangChiTietRepository.findByGiohang_IdgiohangAndCtsp_Idctsp(idgiohang,idctsp);
@@ -87,7 +89,7 @@ public class GioHangCTServiceImpl implements GioHangCTService {
     }
 
     @Override
-    public GioHangChiTiet updateGHCT(UUID idghct, Long soluong) {
+    public GioHangChiTiet updateGHCT(UUID idghct, Integer soluong) {
         GioHangChiTiet ghct = gioHangChiTietRepository.findById(idghct).orElse(null);
 
         if (ghct != null){
@@ -134,5 +136,15 @@ public class GioHangCTServiceImpl implements GioHangCTService {
         }else {
             throw new EntityNotFoundException();
         }
+    }
+
+    @Override
+    public List<CheckoutRepon> getAllTongTien(UUID idgiohang) {
+        return gioHangChiTietRepository.getAllTongTien(idgiohang);
+    }
+
+    @Override
+    public List<TongSoTienRepo> getTongSoTien(UUID idgiohang) {
+        return gioHangChiTietRepository.getTongSoTien(idgiohang);
     }
 }

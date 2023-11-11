@@ -28,9 +28,22 @@ public class GioHangCTController {
         return ResponseEntity.ok(gioHangCTService.getALlGHCT(idgh));
     }
 
+    // TODO Load all tổng tiền
+    @GetMapping("/show-tong-tien")
+    public ResponseEntity<?> getALLTongTien(@RequestParam("idgiohang") UUID idgiohang){
+        return ResponseEntity.ok(gioHangCTService.getAllTongTien(idgiohang));
+    }
+
+    // TODO Load tổng số tiền
+    @GetMapping("/show-tong-so-tien")
+    public ResponseEntity<?> getALLTongSoTien(@RequestParam("idgiohang") UUID idgiohang){
+        return ResponseEntity.ok(gioHangCTService.getTongSoTien(idgiohang));
+    }
+
+
     // TODO Thêm sản phẩm vào giỏ hàng ct
     @PostMapping("/add-san-pham")
-    public ResponseEntity<?> addSPVaoGH(@RequestParam("idgiohang") UUID idgh , @RequestParam("idctsp") UUID idspct, @RequestParam("soluong") Long soluong){
+    public ResponseEntity<?> addSPVaoGH(@RequestParam("idgiohang") UUID idgh , @RequestParam("idctsp") UUID idspct, @RequestParam("soluong") Integer soluong){
 
         try {
             gioHangCTService.addSPVaoGioHangCT(idgh,idspct, soluong);
@@ -42,7 +55,7 @@ public class GioHangCTController {
 
     // TODO update số lượng trong giỏ hàng ct
     @PutMapping("/update-so-luong")
-    public ResponseEntity<?> updateSoLuong(@RequestParam("idghct") UUID idghct, @RequestParam("soluong") Long soluong){
+    public ResponseEntity<?> updateSoLuong(@RequestParam("idghct") UUID idghct, @RequestParam("soluong") Integer soluong){
 
         try {
             gioHangCTService.updateGHCT(idghct, soluong);

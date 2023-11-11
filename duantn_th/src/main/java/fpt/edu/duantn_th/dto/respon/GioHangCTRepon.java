@@ -8,7 +8,7 @@ public interface GioHangCTRepon {
     String getTenimage();
     String gettensp();
     String gettenmausac();
-    String getsize();
+    String gettensize();
     String gettenchatlieu();
     String getgiaban();
     String getsoluong();

@@ -1,9 +1,12 @@
 package fpt.edu.duantn_th.repository;
 
+import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
 import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
+import fpt.edu.duantn_th.dto.respon.TongSoTienRepo;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +31,27 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     // Tìm kiếm idspct and idgh trong ghct
     GioHangChiTiet findByGiohang_IdgiohangAndCtsp_Idctsp(UUID idgiohang, UUID idctsp);
 
+    // Load all checkout
+    @Query( value = "SELECT gh.id , sp.TenSP , img.TenImage , ghct.SoLuong ,(ctsp.GiaBan * ghct.soluong) AS tongtien\n" +
+            "            FROM giohang gh\n" +
+            "            JOIN giohangchitiet ghct ON gh.id = ghct.IdGioHang\n" +
+            "            JOIN ChiTietSP ctsp ON ghct.IdCTSP = ctsp.id\n" +
+            "\t\t\tJoin Image img on img.IdCTSP = ctsp.Id\n" +
+            "            JOIN sanpham sp ON ctsp.IdSP = sp.id\n" +
+            "            WHERE gh.id = :idgh and img.isdefault = 'true' and gh.trangthai = 1", nativeQuery = true)
+
+    List<CheckoutRepon> getAllTongTien(@Param("idgh") UUID idgiohang);
+
+    // Tính tổng tiền
+
+    @Query( value = "SELECT  SUM(ctsp.GiaBan * ghct.soluong) AS TongSoTien\n" +
+            "            FROM ChiTietSP ctsp\n" +
+            "            JOIN sanpham sp ON ctsp.IdSP = sp.id\n" +
+            "            JOIN size s ON ctsp.IdSize = s.id\n" +
+            "            join image img on ctsp.Id = img.IdCTSP\n" +
+            "            JOIN giohangchitiet ghct ON ghct.IdCTSP = ctsp.id\n" +
+            "            JOIN giohang gh ON gh.id = ghct.IdGioHang\n" +
+            "            JOIN mausac ms ON ms.id = ctsp.IdMauSac\n" +
+            "            WHERE img.isdefault = 'true' AND gh.id = :idgh" , nativeQuery = true)
+    List<TongSoTienRepo> getTongSoTien(@Param("idgh") UUID idgiohang);
 }

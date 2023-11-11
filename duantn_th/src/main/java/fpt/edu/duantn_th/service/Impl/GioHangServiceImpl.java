@@ -36,7 +36,7 @@ public class GioHangServiceImpl implements GioHangService {
         giohang.setNgaytao(gh.getNgaytao());
         giohang.setNgaycapnhat(gh.getNgaycapnhat());
         giohang.setGhichu(gh.getGhichu());
-        giohang.setTrangthai(1L);
+        giohang.setTrangthai(1);
 
         repository.save(giohang);
         return gh;

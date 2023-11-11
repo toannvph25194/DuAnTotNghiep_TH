@@ -1,6 +1,8 @@
 package fpt.edu.duantn_th.service;
 
+import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
 import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
+import fpt.edu.duantn_th.dto.respon.TongSoTienRepo;
 import fpt.edu.duantn_th.entity.GioHang;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
 
@@ -13,10 +15,10 @@ public interface GioHangCTService {
     List<GioHangCTRepon> getALlGHCT(UUID idgh);
 
     // Add sản phẩm vào giỏ hàng
-    void addSPVaoGioHangCT( UUID idgiohang , UUID idctsp , Long soluong );
+    void addSPVaoGioHangCT( UUID idgiohang , UUID idctsp , Integer soluong );
 
     // Cập Nhật Số Lượng Giỏ Hàng CT
-    GioHangChiTiet updateGHCT(UUID idghct , Long soluong);
+    GioHangChiTiet updateGHCT(UUID idghct , Integer soluong);
 
     // Delete sản phẩm trong giỏ hàng chi tiết
     GioHangChiTiet deleteSPGHCT(UUID idghct);
@@ -24,4 +26,9 @@ public interface GioHangCTService {
     // Delete All sản phẩm trong giỏ hàng chi tiết
     public void deleteALlSPGHCT(UUID idgiohang);
 
+    // get All checkout
+    List<CheckoutRepon> getAllTongTien(UUID idgiohang);
+
+    // get All checkout
+    List<TongSoTienRepo> getTongSoTien(UUID idgiohang);
 }

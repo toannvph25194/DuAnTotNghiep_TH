@@ -30,9 +30,6 @@ public class ChiTietSanPham {
     @Column(name = "giaban")
     private Double giaban;
 
-    @Column(name = "baohanh")
-    private Long baohanh;
-
     @Column(name = "soluongton")
     private Long soluongton;
 
@@ -41,11 +38,6 @@ public class ChiTietSanPham {
 
     @Column(name = "trangthai")
     private Long trangthai;
-
-    @Column(name = "qrcode")
-    private String qrcode;
-
-
 
     // Máp với Image 1-N
     @OneToMany(mappedBy = "ctsp", fetch = FetchType.LAZY)

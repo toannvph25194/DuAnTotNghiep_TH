@@ -24,11 +24,11 @@ public class GioHangCTController {
     // TODO Load on Giỏ Hàng Chi Tiết
 
     @GetMapping("/show")
-    public ResponseEntity<?> getALLGHCT(@RequestParam("idgh") UUID idgh){
+    public ResponseEntity<?> getALLGHCT(@RequestParam("idgiohang") UUID idgh){
         return ResponseEntity.ok(gioHangCTService.getALlGHCT(idgh));
     }
 
-    // TODO Load all tổng tiền
+    // TODO Load all checkout tổng tiền
     @GetMapping("/show-tong-tien")
     public ResponseEntity<?> getALLTongTien(@RequestParam("idgiohang") UUID idgiohang){
         return ResponseEntity.ok(gioHangCTService.getAllTongTien(idgiohang));

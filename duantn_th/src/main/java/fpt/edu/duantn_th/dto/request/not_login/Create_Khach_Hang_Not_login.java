@@ -24,11 +24,11 @@ public class Create_Khach_Hang_Not_login {
 
     private String diaChi;
 
-    private String thanhPho;
+    private String tinh;
 
-    private String quanHuyen;
+    private String huyen;
 
-    private String phuongXa;
+    private String xa;
 
     private Double tongTien;
 

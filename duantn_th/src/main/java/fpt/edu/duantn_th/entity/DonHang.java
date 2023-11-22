@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "donhang")
+@Table(name = "hoadon")
 public class DonHang {
 
     @Id
@@ -78,9 +78,6 @@ public class DonHang {
 
     @Column(name = "trangthai")
     private Integer trangthai;
-
-    @Column(name = "qrcode")
-    private String qrcode;
 
     // Máp với hình thức thanh toán 1-N
     @OneToMany(mappedBy = "donhang", fetch = FetchType.LAZY)

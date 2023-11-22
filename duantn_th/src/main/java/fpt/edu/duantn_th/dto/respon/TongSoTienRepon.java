@@ -1,6 +1,6 @@
 package fpt.edu.duantn_th.dto.respon;
 
-public interface TongSoTienRepo {
+public interface TongSoTienRepon {
 
     Double gettongsotien();
 }

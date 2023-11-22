@@ -2,7 +2,7 @@ package fpt.edu.duantn_th.repository;
 
 import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
 import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
-import fpt.edu.duantn_th.dto.respon.TongSoTienRepo;
+import fpt.edu.duantn_th.dto.respon.TongSoTienRepon;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,19 +26,19 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
             "\t\t\t\t\t\t\t\t\t   join GioHang gh on gh.Id = ghct.IdGioHang\n" +
             "                                       Join Image img on ctsp.Id = img.IdCTSP \n" +
             "                                       where img.isdefault = 'True'  AND ghct.SoLuong > 0  AND gh.Id = ?", nativeQuery = true)
-    List<GioHangCTRepon> getAllGhCT(UUID idgh);
+    List<GioHangCTRepon> getAllGhCT(UUID idgiohang);
 
     // Tìm kiếm idspct and idgh trong ghct
     GioHangChiTiet findByGiohang_IdgiohangAndCtsp_Idctsp(UUID idgiohang, UUID idctsp);
 
-    // Load all checkout
-    @Query( value = "SELECT gh.id , sp.TenSP , img.TenImage , ghct.SoLuong ,(ctsp.GiaBan * ghct.soluong) AS tongtien\n" +
+    // Load all checkout tổng tiền
+    @Query( value = "SELECT ghct.id , sp.TenSP , img.TenImage , ghct.SoLuong ,(ctsp.GiaBan * ghct.soluong) AS tongtien\n" +
             "            FROM giohang gh\n" +
             "            JOIN giohangchitiet ghct ON gh.id = ghct.IdGioHang\n" +
             "            JOIN ChiTietSP ctsp ON ghct.IdCTSP = ctsp.id\n" +
             "\t\t\tJoin Image img on img.IdCTSP = ctsp.Id\n" +
             "            JOIN sanpham sp ON ctsp.IdSP = sp.id\n" +
-            "            WHERE gh.id = :idgh and img.isdefault = 'true' and gh.trangthai = 1", nativeQuery = true)
+            "            WHERE gh.id = :idgh and img.isdefault = 'true' and gh.trangthai = 1 AND ghct.SoLuong > 0", nativeQuery = true)
 
     List<CheckoutRepon> getAllTongTien(@Param("idgh") UUID idgiohang);
 
@@ -52,6 +52,6 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
             "            JOIN giohangchitiet ghct ON ghct.IdCTSP = ctsp.id\n" +
             "            JOIN giohang gh ON gh.id = ghct.IdGioHang\n" +
             "            JOIN mausac ms ON ms.id = ctsp.IdMauSac\n" +
-            "            WHERE img.isdefault = 'true' AND gh.id = :idgh" , nativeQuery = true)
-    List<TongSoTienRepo> getTongSoTien(@Param("idgh") UUID idgiohang);
+            "            WHERE img.isdefault = 'true' AND gh.id = :idgh AND ghct.SoLuong > 0" , nativeQuery = true)
+    List<TongSoTienRepon> getTongSoTien(@Param("idgh") UUID idgiohang);
 }

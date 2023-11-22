@@ -28,6 +28,9 @@ public class ChucVu {
     @Column(name = "trangthai")
     private Long trangthai;
 
+    @Column(name = "loaichucvu")
+    private Integer loaichucvu;
+
     @OneToMany(mappedBy = "chucvu", fetch = FetchType.LAZY)
     @JsonManagedReference
     List<User> users;

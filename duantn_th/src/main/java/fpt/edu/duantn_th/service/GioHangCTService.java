@@ -2,8 +2,7 @@ package fpt.edu.duantn_th.service;
 
 import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
 import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
-import fpt.edu.duantn_th.dto.respon.TongSoTienRepo;
-import fpt.edu.duantn_th.entity.GioHang;
+import fpt.edu.duantn_th.dto.respon.TongSoTienRepon;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.UUID;
 public interface GioHangCTService {
 
     // Get on ghct
-    List<GioHangCTRepon> getALlGHCT(UUID idgh);
+    List<GioHangCTRepon> getALlGHCT(UUID idgiohang);
 
     // Add sản phẩm vào giỏ hàng
     void addSPVaoGioHangCT( UUID idgiohang , UUID idctsp , Integer soluong );
@@ -30,5 +29,5 @@ public interface GioHangCTService {
     List<CheckoutRepon> getAllTongTien(UUID idgiohang);
 
     // get All checkout
-    List<TongSoTienRepo> getTongSoTien(UUID idgiohang);
+    List<TongSoTienRepon> getTongSoTien(UUID idgiohang);
 }

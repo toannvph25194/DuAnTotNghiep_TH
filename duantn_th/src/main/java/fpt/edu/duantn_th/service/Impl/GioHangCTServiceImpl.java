@@ -2,7 +2,7 @@ package fpt.edu.duantn_th.service.Impl;
 
 import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
 import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
-import fpt.edu.duantn_th.dto.respon.TongSoTienRepo;
+import fpt.edu.duantn_th.dto.respon.TongSoTienRepon;
 import fpt.edu.duantn_th.entity.ChiTietSanPham;
 import fpt.edu.duantn_th.entity.GioHang;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
@@ -31,8 +31,8 @@ public class GioHangCTServiceImpl implements GioHangCTService {
     GioHangRepository gioHangRepository;
 
     @Override
-    public List<GioHangCTRepon> getALlGHCT(UUID idgh) {
-        return gioHangChiTietRepository.getAllGhCT(idgh);
+    public List<GioHangCTRepon> getALlGHCT(UUID idgiohang) {
+        return gioHangChiTietRepository.getAllGhCT(idgiohang);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class GioHangCTServiceImpl implements GioHangCTService {
     }
 
     @Override
-    public List<TongSoTienRepo> getTongSoTien(UUID idgiohang) {
+    public List<TongSoTienRepon> getTongSoTien(UUID idgiohang) {
         return gioHangChiTietRepository.getTongSoTien(idgiohang);
     }
 }

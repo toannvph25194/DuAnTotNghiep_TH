@@ -55,7 +55,7 @@ public class DonHangServiceNotLoginImpl implements DonHangNotLoginService {
                 khachhang.setEmail(create_khach_hang_not_login.getEmail());
                 khachhang.setHovaten(create_khach_hang_not_login.getHoTen());
                 khachhang.setSodienthoai(create_khach_hang_not_login.getSoDienThoai());
-
+                khachhang.setTrangthai(0L);
                 userRepository_not_login.save(khachhang);
 
                 // Tạo Địa Chỉ Cho Khách Hàng
@@ -64,9 +64,9 @@ public class DonHangServiceNotLoginImpl implements DonHangNotLoginService {
                 diaChi.setIddiachi(UUID.randomUUID());
                 diaChi.setDiachi(create_khach_hang_not_login.getDiaChi());
                 diaChi.setQuocgia("Việt Nam");
-                diaChi.setTinh(create_khach_hang_not_login.getThanhPho());
-                diaChi.setHuyen(create_khach_hang_not_login.getQuanHuyen());
-                diaChi.setXa(create_khach_hang_not_login.getPhuongXa());
+                diaChi.setTinh(create_khach_hang_not_login.getTinh());
+                diaChi.setHuyen(create_khach_hang_not_login.getHuyen());
+                diaChi.setXa(create_khach_hang_not_login.getXa());
                 diaChi.setTrangthai(1);
                 diaChi.setUsers(khachhang);
                 diaChiRepository_not_login.save(diaChi);
@@ -86,13 +86,13 @@ public class DonHangServiceNotLoginImpl implements DonHangNotLoginService {
         donHang.setIddonhang(UUID.randomUUID());
         donHang.setMadonhang(maHd);
         donHang.setNgaytao(timestamp);
-        donHang.setDiachi(create_khach_hang_not_login.getDiaChi() +" "+ create_khach_hang_not_login.getPhuongXa() +" "+create_khach_hang_not_login.getQuanHuyen() +" "+create_khach_hang_not_login.getThanhPho());
+        donHang.setDiachi(create_khach_hang_not_login.getDiaChi() +" "+ create_khach_hang_not_login.getXa() +" "+create_khach_hang_not_login.getHuyen() +" "+create_khach_hang_not_login.getTinh());
         donHang.setSdtnguoinhan(create_khach_hang_not_login.getSoDienThoai());
         donHang.setTennguoinhan(create_khach_hang_not_login.getHoTen());
         donHang.setUsers(khachhang);
         donHang.setThanhtien(create_khach_hang_not_login.getTongTien());
         donHang.setTienkhachtra(create_khach_hang_not_login.getTienKhachTra());
-        donHang.setTienthua(create_khach_hang_not_login.getTienKhachTra() - create_khach_hang_not_login.getTongTien());
+//        donHang.setTienthua(create_khach_hang_not_login.getTienKhachTra() - create_khach_hang_not_login.getTongTien().doubleValue());
 
         donHang.setTrangthai(StatusOrderEnums.CHO_XAC_NHAN.getValue());
         donHangRepository_not_login.save(donHang);

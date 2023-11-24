@@ -59,12 +59,6 @@ public class SanPhamController {
         return ResponseEntity.ok(service.getALlSPNewRepon());
     }
 
-    // TODO detail sp
-    @GetMapping("/detail-sp/{idsp}")
-    public ResponseEntity<?> getByIdSP(@PathVariable("idsp") UUID idsp){
-        return ResponseEntity.ok(service.getByIdSP(idsp));
-    }
-
     // TODO Lọc danh mục sp
     @GetMapping("/loc-danh-muc/{iddanhmuc}")
     public ResponseEntity<?> findByIdDanhMuc(@PathVariable("iddanhmuc") UUID iddanhmuc){

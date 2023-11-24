@@ -14,7 +14,5 @@ public interface SanPhamRepon {
     Double getgiaban();
     Long getsoluongton();
     String gettensize();
-    String gettenchatlieu();
-
 
 }

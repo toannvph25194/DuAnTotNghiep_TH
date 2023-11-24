@@ -16,11 +16,10 @@ import java.util.UUID;
 public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, UUID> {
 
     // Load giỏ hàng
-    @Query(value = "select ghct.Id , ctsp.GiaBan , img.TenImage,  sp.TenSP , ms.TenMauSac , s.tensize, ghct.SoLuong , cl.TenChatLieu from ChiTietSP ctsp\n" +
+    @Query(value = "select ghct.Id , ctsp.GiaBan , img.TenImage,  sp.TenSP , ms.TenMauSac , s.tensize, ghct.SoLuong  from ChiTietSP ctsp\n" +
             "            \n" +
             "                                       join SanPham sp on ctsp.IdSP = sp.Id\n" +
             "                                       join  MauSac ms on ctsp.IdMauSac = ms.Id\n" +
-            "                                       join ChatLieu cl on ctsp.IdChatLieu = cl.Id\n" +
             "                                       join Size s on ctsp.IdSize = s.Id\n" +
             "\t\t\t\t\t\t\t\t\t   join GioHangChiTiet ghct on ghct.IdCTSP = ctsp.id\n" +
             "\t\t\t\t\t\t\t\t\t   join GioHang gh on gh.Id = ghct.IdGioHang\n" +

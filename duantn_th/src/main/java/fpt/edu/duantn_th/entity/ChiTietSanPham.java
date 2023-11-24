@@ -58,12 +58,6 @@ public class ChiTietSanPham {
 //------------------------------------
 
 
-    // Máp với chất liệu N-1
-    @ManyToOne
-    @JoinColumn(name = "idchatlieu")
-    @JsonBackReference
-    ChatLieu chatlieu;
-
     // Máp với Size N-1
     @ManyToOne
     @JoinColumn(name = "idsize")

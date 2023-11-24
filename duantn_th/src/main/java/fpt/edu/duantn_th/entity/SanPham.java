@@ -71,4 +71,9 @@ public class SanPham {
     @JsonBackReference
     DanhMuc danhmuc;
 
+    // Máp với chất liệu N-1
+    @ManyToOne
+    @JoinColumn(name = "idchatlieu")
+    @JsonBackReference
+    ChatLieu chatlieu;
 }

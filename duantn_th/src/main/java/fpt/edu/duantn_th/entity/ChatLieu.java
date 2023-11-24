@@ -34,5 +34,5 @@ public class ChatLieu {
 
     @OneToMany(mappedBy = "chatlieu", fetch = FetchType.LAZY)
     @JsonManagedReference
-    List<ChiTietSanPham> ctsp;
+    List<SanPham> sanpham;
 }

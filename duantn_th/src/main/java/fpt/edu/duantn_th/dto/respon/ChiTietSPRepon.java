@@ -7,15 +7,10 @@ public interface ChiTietSPRepon {
 
     UUID getId();
     String getTenimage();
-    String getmasp();
     String gettensp();
-    Boolean gettheloai();
-    String gettenmausac();
-    String gettendanhmuc();
     Double getgiaban();
-    Long getsoluongton();
-    String gettensize();
     String gettenchatlieu();
-
+    String gettenxuatxu();
+    String gettenthuonghieu();
 
 }

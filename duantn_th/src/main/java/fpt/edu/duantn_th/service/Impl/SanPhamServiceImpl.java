@@ -48,11 +48,6 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
-    public List<SanPhamRepon> getByIdSP(UUID idsp) {
-        return sanPhamrepository.getByIdSP(idsp);
-    }
-
-    @Override
     public List<SanPhamRepon> findByIdDM(UUID iddm) {
         return sanPhamrepository.findByIdDanhMuc(iddm);
     }

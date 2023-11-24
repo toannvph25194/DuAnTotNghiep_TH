@@ -18,18 +18,14 @@ public interface SanPhamService {
     // Load sp respon
     List<SanPhamRepon> getALlSPRepon();
 
-    // Load sp respon
+    // Load sp Nam respon
     List<SanPhamRepon> getALlSPNamRepon();
 
-    // Load sp respon
+    // Load sp Nu respon
     List<SanPhamRepon> getALlSPNuRepon();
 
     // Load sp mới respon
     List<SanPhamRepon> getALlSPNewRepon();
-
-    // Detail sp respon
-
-    List<SanPhamRepon> getByIdSP(UUID idsp);
 
     // FindById Danh Mục
     List<SanPhamRepon> findByIdDM(UUID iddm);

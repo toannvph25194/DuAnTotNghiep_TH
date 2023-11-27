@@ -39,11 +39,6 @@ public class ChiTietSanPham {
     @Column(name = "trangthai")
     private Long trangthai;
 
-    // Máp với Image 1-N
-    @OneToMany(mappedBy = "ctsp", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    List<Image> image;
-
     // Máp với giỏ hàng ct 1-N
     @OneToMany(mappedBy = "ctsp",fetch = FetchType.LAZY)
     @JsonManagedReference

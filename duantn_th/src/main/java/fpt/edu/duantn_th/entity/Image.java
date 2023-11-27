@@ -32,8 +32,8 @@ public class Image {
     private Boolean isdefault;
 
     @ManyToOne
-    @JoinColumn(name = "idctsp")
+    @JoinColumn(name = "idsp")
     @JsonBackReference
-    ChiTietSanPham ctsp;
+    SanPham sanpham;
 
 }

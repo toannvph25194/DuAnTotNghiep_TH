@@ -50,6 +50,11 @@ public class SanPham {
     @JsonManagedReference
     List<ChiTietSanPham> ctsp;
 
+    // Máp với Image 1-N
+    @OneToMany(mappedBy = "sanpham", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    List<Image> image;
+
 
 //--------------------------------------
 

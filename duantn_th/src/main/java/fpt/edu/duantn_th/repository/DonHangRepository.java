@@ -1,4 +1,9 @@
 package fpt.edu.duantn_th.repository;
 
-public interface DonHangRepository {
+import fpt.edu.duantn_th.entity.DonHang;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
+public interface DonHangRepository extends JpaRepository<DonHang , UUID> {
 }

@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface SanPhamService {
 
     // Load PT sp respon
-    Page<SanPhamRepon> getALlPTSPRepon(Pageable pageable);
+    Page<SanPhamRepon> getALlPTSPRepon(Integer page);
 
     // Load sp respon
     List<SanPhamRepon> getALlSPRepon();

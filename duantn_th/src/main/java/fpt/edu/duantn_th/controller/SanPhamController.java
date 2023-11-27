@@ -25,13 +25,8 @@ public class SanPhamController {
 
     // TODO getALl PT sp lên trang chủ
     @GetMapping("/show-phan-trang")
-    public ResponseEntity<?> getAllPTSanPham(
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "9") int size) {
-
-        Pageable pageable = PageRequest.of(page, size);
-        Page<SanPhamRepon> sanPhamPage = service.getALlPTSPRepon(pageable);
-        return new ResponseEntity<>(sanPhamPage, HttpStatus.OK);
+    public ResponseEntity<?> getAllPTSanPham( @RequestParam(defaultValue = "0" ,value = "page") Integer page) {
+        return ResponseEntity.ok(service.getALlPTSPRepon(page));
     }
 
 
@@ -53,7 +48,7 @@ public class SanPhamController {
         return ResponseEntity.ok(service.getALlSPNuRepon());
     }
 
-    // TODO getALl sp Nữ lên trang chủ
+    // TODO getALl sp mới lên trang chủ
     @GetMapping("/show-new")
     public ResponseEntity<?> getAllSPNew(){
         return ResponseEntity.ok(service.getALlSPNewRepon());

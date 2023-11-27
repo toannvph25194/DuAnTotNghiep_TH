@@ -23,7 +23,7 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
             "                                       join Size s on ctsp.IdSize = s.Id\n" +
             "\t\t\t\t\t\t\t\t\t   join GioHangChiTiet ghct on ghct.IdCTSP = ctsp.id\n" +
             "\t\t\t\t\t\t\t\t\t   join GioHang gh on gh.Id = ghct.IdGioHang\n" +
-            "                                       Join Image img on ctsp.Id = img.IdCTSP \n" +
+            "                                       Join Image img on sp.Id = img.IdSP \n" +
             "                                       where img.isdefault = 'True'  AND ghct.SoLuong > 0  AND gh.Id = ?", nativeQuery = true)
     List<GioHangCTRepon> getAllGhCT(UUID idgiohang);
 
@@ -32,25 +32,23 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
 
     // Load all checkout tổng tiền
     @Query( value = "SELECT ghct.id , sp.TenSP , img.TenImage , ghct.SoLuong ,(ctsp.GiaBan * ghct.soluong) AS tongtien\n" +
-            "            FROM giohang gh\n" +
-            "            JOIN giohangchitiet ghct ON gh.id = ghct.IdGioHang\n" +
-            "            JOIN ChiTietSP ctsp ON ghct.IdCTSP = ctsp.id\n" +
-            "\t\t\tJoin Image img on img.IdCTSP = ctsp.Id\n" +
-            "            JOIN sanpham sp ON ctsp.IdSP = sp.id\n" +
-            "            WHERE gh.id = :idgh and img.isdefault = 'true' and gh.trangthai = 1 AND ghct.SoLuong > 0", nativeQuery = true)
+            "                        FROM giohang gh\n" +
+            "                        JOIN giohangchitiet ghct ON gh.id = ghct.IdGioHang\n" +
+            "                        JOIN ChiTietSP ctsp ON ghct.IdCTSP = ctsp.id\n" +
+            "\t\t\t\t\t\tJOIN sanpham sp ON ctsp.IdSP = sp.id\n" +
+            "\t\t\t\t\t\tJoin Image img on img.IdSP = sp.Id\n" +
+            "                        WHERE gh.id = :idgh and img.isdefault = 'true' and gh.trangthai = 1 AND ghct.SoLuong > 0", nativeQuery = true)
 
     List<CheckoutRepon> getAllTongTien(@Param("idgh") UUID idgiohang);
 
     // Tính tổng tiền
 
     @Query( value = "SELECT  SUM(ctsp.GiaBan * ghct.soluong) AS TongSoTien\n" +
-            "            FROM ChiTietSP ctsp\n" +
-            "            JOIN sanpham sp ON ctsp.IdSP = sp.id\n" +
-            "            JOIN size s ON ctsp.IdSize = s.id\n" +
-            "            join image img on ctsp.Id = img.IdCTSP\n" +
-            "            JOIN giohangchitiet ghct ON ghct.IdCTSP = ctsp.id\n" +
-            "            JOIN giohang gh ON gh.id = ghct.IdGioHang\n" +
-            "            JOIN mausac ms ON ms.id = ctsp.IdMauSac\n" +
-            "            WHERE img.isdefault = 'true' AND gh.id = :idgh AND ghct.SoLuong > 0" , nativeQuery = true)
+            "                        FROM ChiTietSP ctsp\n" +
+            "                        JOIN sanpham sp ON ctsp.IdSP = sp.id\n" +
+            "                        join image img on sp.Id = img.IdSP\n" +
+            "                        JOIN giohangchitiet ghct ON ghct.IdCTSP = ctsp.id\n" +
+            "                        JOIN giohang gh ON gh.id = ghct.IdGioHang\n" +
+            "                        WHERE img.isdefault = 'true' AND gh.id = :idgh AND ghct.SoLuong > 0" , nativeQuery = true)
     List<TongSoTienRepon> getTongSoTien(@Param("idgh") UUID idgiohang);
 }

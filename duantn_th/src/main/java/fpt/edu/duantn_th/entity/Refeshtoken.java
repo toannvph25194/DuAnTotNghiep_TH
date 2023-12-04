@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -23,10 +24,10 @@ public class Refeshtoken {
     private Long id;
 
     @Column(name = "thoigianhethan")
-    private Date thoigianhethan;
+    private LocalDate thoigianhethan;
 
     @Column(name = "token")
-    private Long token;
+    private String token;
 
 
     //Máp với users N-1

@@ -31,13 +31,13 @@ public class ChiTietSanPham {
     private Double giaban;
 
     @Column(name = "soluongton")
-    private Long soluongton;
+    private Integer soluongton;
 
     @Column(name = "mota")
     private String mota;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
     // Máp với giỏ hàng ct 1-N
     @OneToMany(mappedBy = "ctsp",fetch = FetchType.LAZY)

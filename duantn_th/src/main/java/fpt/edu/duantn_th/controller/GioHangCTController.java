@@ -1,5 +1,6 @@
 package fpt.edu.duantn_th.controller;
 
+import fpt.edu.duantn_th.dto.respon.MessageAddGioHangCT;
 import fpt.edu.duantn_th.service.Impl.GioHangCTServiceImpl;
 import fpt.edu.duantn_th.service.Impl.GioHangServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
@@ -46,10 +47,11 @@ public class GioHangCTController {
     public ResponseEntity<?> addSPVaoGH(@RequestParam("idgiohang") UUID idgh , @RequestParam("idctsp") UUID idspct, @RequestParam("soluong") Integer soluong){
 
         try {
+            System.out.println("ABC :" + idgh + idspct + soluong);
             gioHangCTService.addSPVaoGioHangCT(idgh,idspct, soluong);
-            return ResponseEntity.ok("Thêm sản phẩm vào giỏ hàng chi tiết thành công !");
+            return ResponseEntity.ok(new MessageAddGioHangCT("Thêm sản phẩm vào giỏ hàng chi tiết thành công !"));
         }catch (Exception ex){
-            return ResponseEntity.badRequest().body("Thêm sản phẩm vào giỏ hàng chi tiết không thành công !");
+            return ResponseEntity.badRequest().body(new MessageAddGioHangCT ("Không thêm được sp vào giỏ hàng !"));
         }
     }
 

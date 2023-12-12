@@ -2,6 +2,7 @@ package fpt.edu.duantn_th.service;
 
 import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
 import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
+import fpt.edu.duantn_th.dto.respon.MessageAddGioHangCT;
 import fpt.edu.duantn_th.dto.respon.TongSoTienRepon;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
 
@@ -14,7 +15,7 @@ public interface GioHangCTService {
     List<GioHangCTRepon> getALlGHCT(UUID idgiohang);
 
     // Add sản phẩm vào giỏ hàng
-    void addSPVaoGioHangCT( UUID idgiohang , UUID idctsp , Integer soluong );
+    void addSPVaoGioHangCT(UUID idgiohang , UUID idctsp , Integer soluong );
 
     // Cập Nhật Số Lượng Giỏ Hàng CT
     GioHangChiTiet updateGHCT(UUID idghct , Integer soluong);

@@ -16,7 +16,7 @@ import java.util.UUID;
 public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, UUID> {
 
     // Load giỏ hàng
-    @Query(value = "select ghct.Id , ctsp.GiaBan , img.TenImage,  sp.TenSP , ms.TenMauSac , s.tensize, ghct.SoLuong  from ChiTietSP ctsp\n" +
+    @Query(value = "select ghct.Id , ctsp.GiaBan,SoLuongTon , img.TenImage,  sp.TenSP , ms.TenMauSac , s.tensize, ghct.SoLuong  from ChiTietSP ctsp\n" +
             "            \n" +
             "                                       join SanPham sp on ctsp.IdSP = sp.Id\n" +
             "                                       join  MauSac ms on ctsp.IdMauSac = ms.Id\n" +
@@ -31,7 +31,7 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     GioHangChiTiet findByGiohang_IdgiohangAndCtsp_Idctsp(UUID idgiohang, UUID idctsp);
 
     // Load all checkout tổng tiền
-    @Query( value = "SELECT ghct.id , sp.TenSP , img.TenImage , ghct.SoLuong ,(ctsp.GiaBan * ghct.soluong) AS tongtien\n" +
+    @Query( value = "SELECT ghct.Id , sp.TenSP , img.TenImage , ghct.SoLuong ,(ctsp.GiaBan * ghct.soluong) AS tongtien\n" +
             "                        FROM giohang gh\n" +
             "                        JOIN giohangchitiet ghct ON gh.id = ghct.IdGioHang\n" +
             "                        JOIN ChiTietSP ctsp ON ghct.IdCTSP = ctsp.id\n" +

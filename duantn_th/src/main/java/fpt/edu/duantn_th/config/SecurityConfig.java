@@ -32,6 +32,11 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/san-pham/**").permitAll()
+                        .requestMatchers("/api/ctsp/**").permitAll()
+                        .requestMatchers("/api/gio-hang/**").permitAll()
+                        .requestMatchers("/api/ghct/**").permitAll()
+                        .requestMatchers("/api/hoa-don/**").permitAll()
                         .requestMatchers("/ban/hang/**").permitAll()
                         .requestMatchers("/api/hoadon/**").hasAuthority(ChucVu.ROLE_USER)
                         .anyRequest()

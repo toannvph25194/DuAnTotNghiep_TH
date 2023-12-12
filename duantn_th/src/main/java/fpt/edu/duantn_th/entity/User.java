@@ -54,7 +54,7 @@ public class User {
     private Boolean gioitinh;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
     @Column(name = "sodienthoai")
     private String sodienthoai;

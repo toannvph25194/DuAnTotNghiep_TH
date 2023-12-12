@@ -31,7 +31,7 @@ public class DanhMuc {
     private String mota;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
     @OneToMany(mappedBy = "danhmuc", fetch = FetchType.LAZY)
     @JsonManagedReference

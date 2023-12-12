@@ -44,6 +44,6 @@ public class HoaDonChiTiet {
     @ManyToOne
     @JoinColumn(name = "iddonhang")
     @JsonBackReference
-    DonHang donhang;
+    HoaDon donhang;
 
 }

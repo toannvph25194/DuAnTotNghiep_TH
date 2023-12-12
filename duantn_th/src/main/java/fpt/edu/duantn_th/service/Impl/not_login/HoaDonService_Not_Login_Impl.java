@@ -1,4 +1,4 @@
-package fpt.edu.duantn_th.service.Impl;
+package fpt.edu.duantn_th.service.Impl.not_login;
 
 import fpt.edu.duantn_th.dto.request.not_login.Create_Khach_Hang_Not_login;
 import fpt.edu.duantn_th.dto.respon.not_login.MessageThanhToanRepon_not_login;
@@ -6,7 +6,7 @@ import fpt.edu.duantn_th.dto.respon.not_login.MessageThanhToanRepon_not_login;
 import fpt.edu.duantn_th.entity.*;
 import fpt.edu.duantn_th.enums.StatusOrderEnums;
 import fpt.edu.duantn_th.repository.not_login.*;
-import fpt.edu.duantn_th.service.DonHangNotLoginService;
+import fpt.edu.duantn_th.service.not_login.HoaDonNot_Login_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.Random;
 import java.util.UUID;
 
 @Service
-public class DonHangServiceNotLoginImpl implements DonHangNotLoginService {
+public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
 
     @Autowired
     UserRepository_not_login userRepository_not_login;
@@ -26,7 +26,7 @@ public class DonHangServiceNotLoginImpl implements DonHangNotLoginService {
     DiaChiRepository_not_login diaChiRepository_not_login;
 
     @Autowired
-    DonHangRepository_not_login donHangRepository_not_login;
+    HoaDonRepository_not_login donHangRepository_not_login;
 
     @Autowired
     GioHangChiTietRepository_not_login gioHangChiTietRepository_not_login;
@@ -55,7 +55,7 @@ public class DonHangServiceNotLoginImpl implements DonHangNotLoginService {
                 khachhang.setEmail(create_khach_hang_not_login.getEmail());
                 khachhang.setHovaten(create_khach_hang_not_login.getHoTen());
                 khachhang.setSodienthoai(create_khach_hang_not_login.getSoDienThoai());
-                khachhang.setTrangthai(0L);
+                khachhang.setTrangthai(0);
                 userRepository_not_login.save(khachhang);
 
                 // Tạo Địa Chỉ Cho Khách Hàng
@@ -81,7 +81,7 @@ public class DonHangServiceNotLoginImpl implements DonHangNotLoginService {
         int randomNumber = rand.nextInt(100000);
         String maHd = String.format("HD%03d", randomNumber);
 
-        DonHang donHang = new DonHang();
+        HoaDon donHang = new HoaDon();
 
         donHang.setIddonhang(UUID.randomUUID());
         donHang.setMadonhang(maHd);

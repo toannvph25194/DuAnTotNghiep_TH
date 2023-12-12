@@ -17,7 +17,7 @@ import java.util.UUID;
 @Entity
 @Builder
 @Table(name = "hoadon")
-public class DonHang {
+public class HoaDon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -43,7 +43,7 @@ public class HinhThucThanhToan {
     @ManyToOne
     @JoinColumn(name = "iddonhang")
     @JsonBackReference
-    DonHang donhang;
+    HoaDon donhang;
 
     //Máp với users N-1
     @ManyToOne

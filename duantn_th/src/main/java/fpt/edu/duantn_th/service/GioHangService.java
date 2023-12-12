@@ -7,6 +7,6 @@ import java.util.UUID;
 public interface GioHangService {
 
     // Tạo giỏ hàng
-    GioHang createGioHang(GioHang gh, UUID id);
+    GioHang createGioHang(GioHang gh, UUID idtk);
 
 }

@@ -2,10 +2,12 @@ package fpt.edu.duantn_th.service.Impl;
 
 import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
 import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
+import fpt.edu.duantn_th.dto.respon.MessageAddGioHangCT;
 import fpt.edu.duantn_th.dto.respon.TongSoTienRepon;
 import fpt.edu.duantn_th.entity.ChiTietSanPham;
 import fpt.edu.duantn_th.entity.GioHang;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
+import fpt.edu.duantn_th.repository.ChiTietSanPhamRepository;
 import fpt.edu.duantn_th.repository.GioHangChiTietRepository;
 import fpt.edu.duantn_th.repository.GioHangRepository;
 import fpt.edu.duantn_th.service.GioHangCTService;
@@ -30,30 +32,37 @@ public class GioHangCTServiceImpl implements GioHangCTService {
     @Autowired
     GioHangRepository gioHangRepository;
 
+    @Autowired
+    ChiTietSanPhamRepository chiTietSanPhamRepository;
+
     @Override
     public List<GioHangCTRepon> getALlGHCT(UUID idgiohang) {
         return gioHangChiTietRepository.getAllGhCT(idgiohang);
     }
 
     @Override
-    public void addSPVaoGioHangCT( UUID idgiohang, UUID idctsp, Integer soluong) {
+    public void addSPVaoGioHangCT(UUID idgiohang, UUID idctsp, Integer soluong) {
 
         // kiểm tra sản phẩm đã có trong giỏ hàng chi tiết chưa
         GioHangChiTiet ghct = gioHangChiTietRepository.findByGiohang_IdgiohangAndCtsp_Idctsp(idgiohang,idctsp);
-
+        ChiTietSanPham ctspupdatesoluong = chiTietSanPhamRepository.findById(idctsp).orElse(null);
         if (ghct != null){
 
             // Sản phẩm đã có trong giỏ hàng , cập nhật số lượng.
             ghct.setSoluong(ghct.getSoluong() + soluong);
 
             // Lấy đơn giá từ sản phẩm chi tiết
-            ChiTietSanPham spct = ghct.getCtsp();
-            if (spct != null) {
-                ghct.setDongia(spct.getGiaban());
+            ChiTietSanPham ctsp = ghct.getCtsp();
+            if (ctsp != null) {
+                ghct.setDongia(ctsp.getGiaban());
             }
 
             // Update vào giỏ hàng chi tiết
             gioHangChiTietRepository.save(ghct);
+
+            // Giảm số lượng của sản phẩm chi tiết
+            ctspupdatesoluong.setSoluongton(ctspupdatesoluong.getSoluongton() - soluong);
+            chiTietSanPhamRepository.save(ctspupdatesoluong);
 
         }else {
 
@@ -80,12 +89,13 @@ public class GioHangCTServiceImpl implements GioHangCTService {
                 gioHangChiTiet.setDongia(newspct.getGiaban());
             }
 
-
             // Add Giỏ Hàng Chi Tiết
             gioHangChiTietRepository.save(gioHangChiTiet);
+
+            // Giảm số lượng của sản phẩm chi tiết
+            ctspupdatesoluong.setSoluongton(ctspupdatesoluong.getSoluongton() - soluong);
+            chiTietSanPhamRepository.save(ctspupdatesoluong);
         }
-
-
     }
 
     @Override
@@ -93,8 +103,26 @@ public class GioHangCTServiceImpl implements GioHangCTService {
         GioHangChiTiet ghct = gioHangChiTietRepository.findById(idghct).orElse(null);
 
         if (ghct != null){
+
+            // Số lượng cũ trong giỏ hàng
+            Integer soLuongCu = ghct.getSoluong();
+
+            // Số lượng hiện tại trong kho của ctsp
+            Integer soLuongTonKho = ghct.getCtsp().getSoluongton();
+
+            // Xử lý tình huống khi số lượng mới nhỏ hơn hoặc bằng số lượng hiện tại trong kho
+            // Số lượng thay đổi
+            Integer soLuongThayDoi = soluong - soLuongCu;
+
             ghct.setSoluong(soluong);
+
+            // Cập nhật số lượng trong kho bằng cách cộng số lượng thay đổi
+            Integer soLuongMoiTonKho = soLuongTonKho - soLuongThayDoi;
+            ghct.getCtsp().setSoluongton(soLuongMoiTonKho);
             gioHangChiTietRepository.save(ghct);
+
+
+
         }else {
             throw new EntityNotFoundException("Id không có trong giỏ hàng !");
         }
@@ -105,7 +133,16 @@ public class GioHangCTServiceImpl implements GioHangCTService {
     public GioHangChiTiet deleteSPGHCT(UUID idghct) {
         GioHangChiTiet ghct = gioHangChiTietRepository.findById(idghct).orElse(null);
         if (ghct != null){
+
             gioHangChiTietRepository.delete(ghct);
+
+            // Cập Nhật lại số lượng tồn trong ctsp
+            ChiTietSanPham ctsp = ghct.getCtsp();
+            if (ctsp != null){
+                ctsp.setSoluongton(ctsp.getSoluongton() + ghct.getSoluong());
+                chiTietSanPhamRepository.save(ctsp);
+            }
+
         }else {
             throw new EntityNotFoundException();
         }
@@ -127,6 +164,12 @@ public class GioHangCTServiceImpl implements GioHangCTService {
             // Xóa tất cả chi tiết giỏ hàng
             for (GioHangChiTiet chiTiet : chiTietList) {
                 gioHangChiTietRepository.delete(chiTiet);
+
+                ChiTietSanPham ctsp = chiTiet.getCtsp();
+                if (ctsp != null){
+                    ctsp.setSoluongton(ctsp.getSoluongton() + chiTiet.getSoluong());
+                    chiTietSanPhamRepository.save(ctsp);
+                }
             }
 
             // Cập nhật lại giỏ hàng sau khi xóa

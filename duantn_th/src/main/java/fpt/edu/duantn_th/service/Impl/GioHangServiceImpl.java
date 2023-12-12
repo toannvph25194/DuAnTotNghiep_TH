@@ -6,10 +6,12 @@ import fpt.edu.duantn_th.entity.User;
 import fpt.edu.duantn_th.repository.GioHangRepository;
 import fpt.edu.duantn_th.repository.UserRepository;
 import fpt.edu.duantn_th.service.GioHangService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,20 +27,26 @@ public class GioHangServiceImpl implements GioHangService {
 
 
     @Override
-    public GioHang createGioHang(GioHang gh, UUID id) {
+    public GioHang createGioHang(GioHang gh, UUID idtk) {
 
-        User us = userRepository.findById(id).orElse(null);
+            List<GioHang> giohangcheck = repository.findByUsers_IdtkAndTrangthai(idtk, 1);
+                if (giohangcheck.isEmpty()) {
 
-        GioHang giohang = new GioHang();
+                    User us = userRepository.findById(idtk).orElse(null);
+                    GioHang giohang = new GioHang();
+                    giohang.setIdgiohang(UUID.randomUUID());
+                    giohang.setUsers(us);
+                    giohang.setNgaytao(gh.getNgaytao());
+                    giohang.setNgaycapnhat(gh.getNgaycapnhat());
+                    giohang.setGhichu(gh.getGhichu());
+                    giohang.setTrangthai(1);
 
-        giohang.setIdgiohang(UUID.randomUUID());
-        giohang.setUsers(us);
-        giohang.setNgaytao(gh.getNgaytao());
-        giohang.setNgaycapnhat(gh.getNgaycapnhat());
-        giohang.setGhichu(gh.getGhichu());
-        giohang.setTrangthai(1);
+                    return repository.save(giohang);
+                } else {
 
-        repository.save(giohang);
-        return gh;
+                    throw new EntityNotFoundException();
+                }
+
+
     }
 }

@@ -7,6 +7,7 @@ import fpt.edu.duantn_th.dto.respon.TongSoTienRepon;
 import fpt.edu.duantn_th.entity.ChiTietSanPham;
 import fpt.edu.duantn_th.entity.GioHang;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
+import fpt.edu.duantn_th.entity.SanPham;
 import fpt.edu.duantn_th.repository.ChiTietSanPhamRepository;
 import fpt.edu.duantn_th.repository.GioHangChiTietRepository;
 import fpt.edu.duantn_th.repository.GioHangRepository;
@@ -51,12 +52,6 @@ public class GioHangCTServiceImpl implements GioHangCTService {
             // Sản phẩm đã có trong giỏ hàng , cập nhật số lượng.
             ghct.setSoluong(ghct.getSoluong() + soluong);
 
-            // Lấy đơn giá từ sản phẩm chi tiết
-            ChiTietSanPham ctsp = ghct.getCtsp();
-            if (ctsp != null) {
-                ghct.setDongia(ctsp.getGiaban());
-            }
-
             // Update vào giỏ hàng chi tiết
             gioHangChiTietRepository.save(ghct);
 
@@ -82,12 +77,6 @@ public class GioHangCTServiceImpl implements GioHangCTService {
 
             // Gét số lượng
             gioHangChiTiet.setSoluong(soluong);
-
-            // Lấy đơn giá từ sản phẩm chi tiết
-            Double giaban = newspct.getGiaban();
-            if (giaban == null){
-                gioHangChiTiet.setDongia(newspct.getGiaban());
-            }
 
             // Add Giỏ Hàng Chi Tiết
             gioHangChiTietRepository.save(gioHangChiTiet);

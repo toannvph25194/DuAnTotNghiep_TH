@@ -112,7 +112,7 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
                 hdct.setDonhang(donHang);
                 hdct.setCtsp(gioHangChiTiet.get().getCtsp());
                 hdct.setSoluong(gioHangChiTiet.get().getSoluong());
-                hdct.setDongia(gioHangChiTiet.get().getCtsp().getGiaban());
+                hdct.setDongia(gioHangChiTiet.get().getCtsp().getSanpham().getGiaban());
 
                 hdct.setTrangthai(1);
 

@@ -44,6 +44,11 @@ public class SanPham {
     @Column(name = "ngaythemsp")
     Date ngaythemsp = new Date();
 
+    @Column(name = "gianhap")
+    private Double gianhap;
+
+    @Column(name = "giaban")
+    private Double giaban;
 
     // Máp SPCT 1-N
     @OneToMany(mappedBy = "sanpham" ,fetch = FetchType.LAZY)

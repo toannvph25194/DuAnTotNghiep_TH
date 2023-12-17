@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham , UUID> {
 
     // Detail SP
-    @Query(value = "SELECT DISTINCT sp.id , ctsp.GiaBan , sp.TenSP , img.TenImage , xx.TenXuatXu , th.TenThuongHieu FROM ChiTietSP ctsp\n" +
+    @Query(value = "SELECT DISTINCT sp.id , sp.GiaBan , sp.TenSP , img.TenImage , xx.TenXuatXu , th.TenThuongHieu FROM ChiTietSP ctsp\n" +
             "INNER JOIN SanPham sp ON sp.Id = ctsp.IdSP\n" +
             "INNER JOIN XuatXu xx on xx.Id = sp.IdXuatXu\n" +
             "INNER JOIN ThuongHieu th on th.Id = sp.IdThuongHieu\n" +
@@ -22,7 +22,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham ,
     ChiTietSPRepon detailSP(UUID idsp);
 
     // getALl sản phẩm mới nhất và 1 ảnh tại trang ctsp
-    @Query(value ="SELECT DISTINCT TOP 4 sp.Id,MaSP,TenSP,TheLoai,NgayThemSP ,ctsp.GiaBan , img.TenImage  from SanPham sp\n" +
+    @Query(value ="SELECT DISTINCT TOP 4 sp.Id,MaSP,TenSP,TheLoai,NgayThemSP ,sp.GiaBan , img.TenImage  from SanPham sp\n" +
             "            \n" +
             "                        join ChiTietSP ctsp on ctsp.IdSP = sp.Id\n" +
             "                        Join Image img on sp.Id = img.IdSP where img.isdefault = 'True'\n" +

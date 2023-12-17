@@ -24,12 +24,6 @@ public class ChiTietSanPham {
     @Column(name = "id")
     private UUID idctsp;
 
-    @Column(name = "gianhap")
-    private Double gianhap;
-
-    @Column(name = "giaban")
-    private Double giaban;
-
     @Column(name = "soluongton")
     private Integer soluongton;
 

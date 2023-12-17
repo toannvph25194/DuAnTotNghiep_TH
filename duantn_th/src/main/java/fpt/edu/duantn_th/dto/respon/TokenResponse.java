@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,6 +23,8 @@ public class TokenResponse {
     private String message;
 
     private String role;
+
+    private UUID idtk;
 
     private String username;
 }

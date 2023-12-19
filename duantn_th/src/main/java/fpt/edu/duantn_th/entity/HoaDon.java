@@ -80,12 +80,12 @@ public class HoaDon {
     private Integer trangthai;
 
     // Máp với hình thức thanh toán 1-N
-    @OneToMany(mappedBy = "donhang", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "hoadon", fetch = FetchType.LAZY)
     @JsonManagedReference
     List<HinhThucThanhToan> httt;
 
     // Máp với Hóa đơn ct 1-N
-    @OneToMany(mappedBy = "donhang",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "hoadon",fetch = FetchType.LAZY)
     @JsonManagedReference
     List<HoaDonChiTiet> hoadonct;
 

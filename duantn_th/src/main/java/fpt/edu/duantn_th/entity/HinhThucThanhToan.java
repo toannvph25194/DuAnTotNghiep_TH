@@ -41,9 +41,9 @@ public class HinhThucThanhToan {
 
     //Máp với đơn hàng N-1
     @ManyToOne
-    @JoinColumn(name = "iddonhang")
+    @JoinColumn(name = "idhoadon")
     @JsonBackReference
-    HoaDon donhang;
+    HoaDon hoadon;
 
     //Máp với users N-1
     @ManyToOne

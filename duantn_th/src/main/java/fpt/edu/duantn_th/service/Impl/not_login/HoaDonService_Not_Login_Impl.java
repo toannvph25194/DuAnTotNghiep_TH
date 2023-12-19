@@ -81,21 +81,21 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
         int randomNumber = rand.nextInt(100000);
         String maHd = String.format("HD%03d", randomNumber);
 
-        HoaDon donHang = new HoaDon();
+        HoaDon hoadon = new HoaDon();
 
-        donHang.setIddonhang(UUID.randomUUID());
-        donHang.setMadonhang(maHd);
-        donHang.setNgaytao(timestamp);
-        donHang.setDiachi(create_khach_hang_not_login.getDiaChi() +" "+ create_khach_hang_not_login.getXa() +" "+create_khach_hang_not_login.getHuyen() +" "+create_khach_hang_not_login.getTinh());
-        donHang.setSdtnguoinhan(create_khach_hang_not_login.getSoDienThoai());
-        donHang.setTennguoinhan(create_khach_hang_not_login.getHoTen());
-        donHang.setUsers(khachhang);
-        donHang.setThanhtien(create_khach_hang_not_login.getTongTien());
-        donHang.setTienkhachtra(create_khach_hang_not_login.getTienKhachTra());
+        hoadon.setIddonhang(UUID.randomUUID());
+        hoadon.setMadonhang(maHd);
+        hoadon.setNgaytao(timestamp);
+        hoadon.setDiachi(create_khach_hang_not_login.getDiaChi() +" "+ create_khach_hang_not_login.getXa() +" "+create_khach_hang_not_login.getHuyen() +" "+create_khach_hang_not_login.getTinh());
+        hoadon.setSdtnguoinhan(create_khach_hang_not_login.getSoDienThoai());
+        hoadon.setTennguoinhan(create_khach_hang_not_login.getHoTen());
+        hoadon.setUsers(khachhang);
+        hoadon.setThanhtien(create_khach_hang_not_login.getTongTien());
+        hoadon.setTienkhachtra(create_khach_hang_not_login.getTienKhachTra());
 //        donHang.setTienthua(create_khach_hang_not_login.getTienKhachTra() - create_khach_hang_not_login.getTongTien().doubleValue());
 
-        donHang.setTrangthai(StatusOrderEnums.CHO_XAC_NHAN.getValue());
-        donHangRepository_not_login.save(donHang);
+        hoadon.setTrangthai(StatusOrderEnums.CHO_XAC_NHAN.getValue());
+        donHangRepository_not_login.save(hoadon);
 
 
         //Step3 : Xử lí hóa đơn chi tiết
@@ -109,7 +109,7 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
                 HoaDonChiTiet hdct = new HoaDonChiTiet();
                 hdct.setIdhoadonct(UUID.randomUUID());
 
-                hdct.setDonhang(donHang);
+                hdct.setHoadon(hoadon);
                 hdct.setCtsp(gioHangChiTiet.get().getCtsp());
                 hdct.setSoluong(gioHangChiTiet.get().getSoluong());
                 hdct.setDongia(gioHangChiTiet.get().getCtsp().getSanpham().getGiaban());

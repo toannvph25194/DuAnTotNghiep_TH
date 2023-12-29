@@ -5,6 +5,8 @@ import fpt.edu.duantn_th.dto.respon.not_login.MessageThanhToanRepon_not_login;
 
 import fpt.edu.duantn_th.entity.*;
 import fpt.edu.duantn_th.enums.StatusOrderEnums;
+import fpt.edu.duantn_th.repository.HinhThucThanhToanRepository;
+import fpt.edu.duantn_th.repository.VouCherRepository;
 import fpt.edu.duantn_th.repository.not_login.*;
 import fpt.edu.duantn_th.service.not_login.HoaDonNot_Login_Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +39,19 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
     @Autowired
     GioHangRepository_not_login gioHangRepository_not_login;
 
+    @Autowired
+    VouCherRepository vouCherRepository;
+
+    @Autowired
+    HinhThucThanhToanRepository hinhThucThanhToanRepository;
+
     @Override
     public MessageThanhToanRepon_not_login thanhToanKhongDangNhap(Create_Khach_Hang_Not_login create_khach_hang_not_login) {
 
-        List<User> userList = userRepository_not_login.getKhachHangByEmailAndSdt(create_khach_hang_not_login.getEmail(), create_khach_hang_not_login.getSoDienThoai());
+        List<User> userList = userRepository_not_login.getKhachHangByEmailAndSdt(create_khach_hang_not_login.getEmail(), create_khach_hang_not_login.getSodienthoai());
         User khachhang ;
+
+        Optional<VouCher> vouCher = vouCherRepository.findById(create_khach_hang_not_login.getIdvoucher());
 
         //Step1 : Xử lí khách hàng và địa chỉ
         if (!userList.isEmpty()){
@@ -53,8 +63,8 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
 
                 khachhang.setIdtk(UUID.randomUUID());
                 khachhang.setEmail(create_khach_hang_not_login.getEmail());
-                khachhang.setHovaten(create_khach_hang_not_login.getHoTen());
-                khachhang.setSodienthoai(create_khach_hang_not_login.getSoDienThoai());
+                khachhang.setHovaten(create_khach_hang_not_login.getHovaten());
+                khachhang.setSodienthoai(create_khach_hang_not_login.getSodienthoai());
                 khachhang.setTrangthai(0);
                 userRepository_not_login.save(khachhang);
 
@@ -62,7 +72,7 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
                 DiaChi diaChi = new DiaChi();
 
                 diaChi.setIddiachi(UUID.randomUUID());
-                diaChi.setDiachi(create_khach_hang_not_login.getDiaChi());
+                diaChi.setDiachi(create_khach_hang_not_login.getDiachi());
                 diaChi.setQuocgia("Việt Nam");
                 diaChi.setTinh(create_khach_hang_not_login.getTinh());
                 diaChi.setHuyen(create_khach_hang_not_login.getHuyen());
@@ -83,20 +93,42 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
 
         HoaDon hoadon = new HoaDon();
 
-        hoadon.setIddonhang(UUID.randomUUID());
+        hoadon.setIdhoadon(UUID.randomUUID());
         hoadon.setMadonhang(maHd);
         hoadon.setNgaytao(timestamp);
-        hoadon.setDiachi(create_khach_hang_not_login.getDiaChi() +" "+ create_khach_hang_not_login.getXa() +" "+create_khach_hang_not_login.getHuyen() +" "+create_khach_hang_not_login.getTinh());
-        hoadon.setSdtnguoinhan(create_khach_hang_not_login.getSoDienThoai());
-        hoadon.setTennguoinhan(create_khach_hang_not_login.getHoTen());
+        hoadon.setDiachi(create_khach_hang_not_login.getDiachi() +" "+ create_khach_hang_not_login.getXa() +" "+create_khach_hang_not_login.getHuyen() +" "+create_khach_hang_not_login.getTinh());
+        hoadon.setSdtnguoinhan(create_khach_hang_not_login.getSodienthoai());
+        hoadon.setTennguoinhan(create_khach_hang_not_login.getHovaten());
         hoadon.setUsers(khachhang);
         hoadon.setThanhtien(create_khach_hang_not_login.getTongTien());
         hoadon.setTienkhachtra(create_khach_hang_not_login.getTienKhachTra());
 //        donHang.setTienthua(create_khach_hang_not_login.getTienKhachTra() - create_khach_hang_not_login.getTongTien().doubleValue());
 
+        hoadon.setGiatrigiam(create_khach_hang_not_login.getGiatrigiam());
+        // Check Nếu IdVouCher Là Null thì Sẽ K Lưu
+        if (vouCher.isPresent()) {
+            hoadon.setVoucher(vouCher.get());
+            vouCher.get().setSoluongdung(vouCher.get().getSoluongdung() + 1);
+
+            // Save Vào cơ sở dữ liệu
+            vouCherRepository.save(vouCher.get());
+        }
+
         hoadon.setTrangthai(StatusOrderEnums.CHO_XAC_NHAN.getValue());
         donHangRepository_not_login.save(hoadon);
 
+        // Sử Lý Hình Thức Thanh Toán
+        HinhThucThanhToan hinhthucTT = new HinhThucThanhToan();
+        hinhthucTT.setIdhtthanhtoan(UUID.randomUUID());
+        hinhthucTT.setHoadon(hoadon);
+        hinhthucTT.setUsers(khachhang);
+        hinhthucTT.setNgaythanhtoan(timestamp);
+        hinhthucTT.setSotientra(create_khach_hang_not_login.getTongTien());
+        hinhthucTT.setPhuongthucthanhtoan(create_khach_hang_not_login.getPhuongThuongThanhToan());
+        hinhthucTT.setGhichu("OK");
+        hinhthucTT.setTrangthai(1);
+
+        hinhThucThanhToanRepository.save(hinhthucTT);
 
         //Step3 : Xử lí hóa đơn chi tiết
         for (UUID idGioHangCT : create_khach_hang_not_login.getGioHangChiTietList()){

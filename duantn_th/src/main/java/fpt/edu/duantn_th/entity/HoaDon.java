@@ -24,7 +24,7 @@ public class HoaDon {
 
 
     @Column(name = "id")
-    private UUID iddonhang;
+    private UUID idhoadon;
 
     @Column(name = "madonhang")
     private String madonhang;
@@ -95,6 +95,13 @@ public class HoaDon {
     @JoinColumn(name = "idtk")
     @JsonBackReference
     User users;
+
+    // Máp với voucher N-1
+    @ManyToOne
+    @JoinColumn(name = "idvoucher")
+    @Enumerated(EnumType.STRING)
+    @JsonBackReference
+    VouCher voucher;
 
 
 }

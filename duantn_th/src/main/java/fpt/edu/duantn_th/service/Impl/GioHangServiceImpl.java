@@ -1,6 +1,7 @@
 package fpt.edu.duantn_th.service.Impl;
 
 
+import fpt.edu.duantn_th.dto.respon.TimKiemIdGH;
 import fpt.edu.duantn_th.entity.GioHang;
 import fpt.edu.duantn_th.entity.User;
 import fpt.edu.duantn_th.repository.GioHangRepository;
@@ -48,5 +49,10 @@ public class GioHangServiceImpl implements GioHangService {
                 }
 
 
+    }
+
+    @Override
+    public TimKiemIdGH findByIdgiohang(UUID idtk) {
+        return repository.findByIdgiohang(idtk);
     }
 }

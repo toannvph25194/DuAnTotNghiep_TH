@@ -28,14 +28,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NotNull HttpServletResponse response,
             @NotNull FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
+        System.out.println("Authorization :" + authHeader);
         final String jwt;
         final String username;
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            System.out.println("Người dùng chưa đăng nhập");
             filterChain.doFilter(request, response);
             return;
         }
         jwt = authHeader.substring(7);
         username = jwtService.extractUsername(jwt); // TODO Chích xuất người dùng từ JWT TOKEN
+        System.out.println("Tên Người Dùng :" + username);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserCustomDetails userCustomDetails = (UserCustomDetails) this.userDetailService
                     .loadUserByUsername(username);
@@ -47,6 +50,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authenticationToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                System.out.println("Authentication :" + SecurityContextHolder.getContext().getAuthentication());
             }
         }
         filterChain.doFilter(request, response);

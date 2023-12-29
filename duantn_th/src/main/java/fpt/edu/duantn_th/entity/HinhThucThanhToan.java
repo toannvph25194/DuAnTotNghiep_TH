@@ -31,13 +31,13 @@ public class HinhThucThanhToan {
     private Double sotientra;
 
     @Column(name = "phuongthucthanhtoan")
-    private Long phuongthucthanhtoan;
+    private Integer phuongthucthanhtoan;
 
     @Column(name = "ghichu")
     private String ghichu;
 
     @Column(name = "trangthai")
-    private Long trangthai;
+    private Integer trangthai;
 
     //Máp với đơn hàng N-1
     @ManyToOne

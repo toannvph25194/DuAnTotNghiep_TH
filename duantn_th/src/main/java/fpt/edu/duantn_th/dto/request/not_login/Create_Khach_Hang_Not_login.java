@@ -16,13 +16,13 @@ import java.util.UUID;
 @Setter
 public class Create_Khach_Hang_Not_login {
 
-    private String hoTen;
+    private String hovaten;
 
-    private String soDienThoai;
+    private String sodienthoai;
 
     private String email;
 
-    private String diaChi;
+    private String diachi;
 
     private String tinh;
 
@@ -32,11 +32,15 @@ public class Create_Khach_Hang_Not_login {
 
     private Double tongTien;
 
+    private UUID idvoucher;
+
+    private Double giatrigiam;
+
     private Double tienKhachTra;
 
     private Double tienThua;
 
-//    private Integer phuongThuongThanhToan;
+    private Integer phuongThuongThanhToan;
 
     private List<UUID> gioHangChiTietList;
 

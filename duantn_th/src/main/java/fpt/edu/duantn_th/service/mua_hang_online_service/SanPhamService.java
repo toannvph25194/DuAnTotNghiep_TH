@@ -1,11 +1,7 @@
-package fpt.edu.duantn_th.service;
+package fpt.edu.duantn_th.service.mua_hang_online_service;
 
-import fpt.edu.duantn_th.dto.respon.ChiTietSPRepon;
-import fpt.edu.duantn_th.dto.respon.SanPhamRepon;
-import fpt.edu.duantn_th.entity.ChiTietSanPham;
-import fpt.edu.duantn_th.entity.SanPham;
+import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.SanPhamRepon;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;

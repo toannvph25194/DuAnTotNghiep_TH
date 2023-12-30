@@ -1,11 +1,8 @@
-package fpt.edu.duantn_th.service.Impl;
+package fpt.edu.duantn_th.service.mua_hang_online_service_Impl;
 
-import fpt.edu.duantn_th.dto.respon.ChiTietSPRepon;
-import fpt.edu.duantn_th.dto.respon.SanPhamRepon;
-import fpt.edu.duantn_th.entity.ChiTietSanPham;
-import fpt.edu.duantn_th.entity.SanPham;
-import fpt.edu.duantn_th.repository.SanPhamRepository;
-import fpt.edu.duantn_th.service.SanPhamService;
+import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.SanPhamRepon;
+import fpt.edu.duantn_th.repository.mua_hang_online_repository.SanPhamRepository;
+import fpt.edu.duantn_th.service.mua_hang_online_service.SanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

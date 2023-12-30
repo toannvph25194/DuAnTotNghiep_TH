@@ -1,9 +1,8 @@
-package fpt.edu.duantn_th.service;
+package fpt.edu.duantn_th.service.mua_hang_online_service;
 
-import fpt.edu.duantn_th.dto.respon.CheckoutRepon;
-import fpt.edu.duantn_th.dto.respon.GioHangCTRepon;
-import fpt.edu.duantn_th.dto.respon.MessageAddGioHangCT;
-import fpt.edu.duantn_th.dto.respon.TongSoTienRepon;
+import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.CheckoutRepon;
+import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.GioHangCTRepon;
+import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.TongSoTienRepon;
 import fpt.edu.duantn_th.entity.GioHangChiTiet;
 
 import java.util.List;

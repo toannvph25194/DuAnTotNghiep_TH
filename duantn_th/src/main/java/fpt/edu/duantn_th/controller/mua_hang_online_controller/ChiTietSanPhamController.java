@@ -1,8 +1,7 @@
-package fpt.edu.duantn_th.controller;
+package fpt.edu.duantn_th.controller.mua_hang_online_controller;
 
 
-import fpt.edu.duantn_th.repository.ChiTietSanPhamRepository;
-import fpt.edu.duantn_th.service.Impl.ChiTietSanPhamServiceImpl;
+import fpt.edu.duantn_th.service.mua_hang_online_service_Impl.ChiTietSanPhamServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

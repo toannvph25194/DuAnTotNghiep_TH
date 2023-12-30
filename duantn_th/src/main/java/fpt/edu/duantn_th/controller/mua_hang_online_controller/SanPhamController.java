@@ -1,15 +1,8 @@
-package fpt.edu.duantn_th.controller;
+package fpt.edu.duantn_th.controller.mua_hang_online_controller;
 
 
-import fpt.edu.duantn_th.dto.respon.SanPhamRepon;
-import fpt.edu.duantn_th.entity.SanPham;
-import fpt.edu.duantn_th.service.Impl.SanPhamServiceImpl;
-import jdk.jfr.Registered;
+import fpt.edu.duantn_th.service.mua_hang_online_service_Impl.SanPhamServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package fpt.edu.duantn_th.dto.respon;
+package fpt.edu.duantn_th.dto.respon.mua_hang_online_respon;
 
 public interface TimKiemSizeRepon {
     String gettensize();

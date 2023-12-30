@@ -1,11 +1,10 @@
-package fpt.edu.duantn_th.dto.request.not_login;
+package fpt.edu.duantn_th.dto.request.mua_hang_online_request.not_login;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 

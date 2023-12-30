@@ -6,7 +6,7 @@ import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.not_login.MessageThan
 import fpt.edu.duantn_th.entity.*;
 import fpt.edu.duantn_th.enums.StatusOrderEnums;
 import fpt.edu.duantn_th.repository.HinhThucThanhToanRepository;
-import fpt.edu.duantn_th.repository.VouCherRepository;
+import fpt.edu.duantn_th.repository.mua_hang_online_repository.VouCherRepository;
 import fpt.edu.duantn_th.repository.mua_hang_online_repository.hoa_don_not_login.*;
 import fpt.edu.duantn_th.service.mua_hang_online_service.hoa_don_not_login.HoaDonNot_Login_Service;
 import org.springframework.beans.factory.annotation.Autowired;

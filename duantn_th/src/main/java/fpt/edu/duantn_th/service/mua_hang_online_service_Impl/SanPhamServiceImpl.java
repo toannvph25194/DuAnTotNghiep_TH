@@ -1,6 +1,10 @@
 package fpt.edu.duantn_th.service.mua_hang_online_service_Impl;
 
+import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.DanhMucShopRepon;
+import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.MauSacShopRepon;
 import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.SanPhamRepon;
+import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.SizeShopRepon;
+import fpt.edu.duantn_th.entity.DanhMuc;
 import fpt.edu.duantn_th.repository.mua_hang_online_repository.SanPhamRepository;
 import fpt.edu.duantn_th.service.mua_hang_online_service.SanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +25,27 @@ public class SanPhamServiceImpl implements SanPhamService {
 
 
     @Override
-    public Page<SanPhamRepon> getALlPTSPRepon(Integer page) {
+    public Page<SanPhamRepon> getALlSPShop(Integer page) {
         Pageable pageable = PageRequest.of(page, 9);
-        return sanPhamrepository.getAllPTSP(pageable);
+        return sanPhamrepository.getAllSPShop(pageable);
     }
 
     @Override
-    public List<SanPhamRepon> getALlSPRepon() {
-        return sanPhamrepository.getAllSP();
+    public Page<SanPhamRepon> getALlSPHome(Integer page) {
+        Pageable pageable = PageRequest.of(page, 12);
+        return sanPhamrepository.getAllSPHome(pageable);
     }
 
     @Override
-    public List<SanPhamRepon> getALlSPNamRepon() {
-        return sanPhamrepository.getAllSPNam();
+    public Page<SanPhamRepon> getALlSPNamRepon(Integer page) {
+        Pageable pageable = PageRequest.of(page, 12);
+        return sanPhamrepository.getAllSPNam(pageable);
     }
 
     @Override
-    public List<SanPhamRepon> getALlSPNuRepon() {
-        return sanPhamrepository.getAllSPNu();
+    public Page<SanPhamRepon> getALlSPNuRepon(Integer page) {
+        Pageable pageable = PageRequest.of(page, 12);
+        return sanPhamrepository.getAllSPNu(pageable);
     }
 
     @Override
@@ -47,17 +54,48 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
-    public List<SanPhamRepon> findByIdDM(UUID iddm) {
-        return sanPhamrepository.findByIdDanhMuc(iddm);
+    public List<DanhMucShopRepon> getAllByDMTrangThai() {
+        return sanPhamrepository.getAllByDMTrangthai();
     }
 
     @Override
-    public List<SanPhamRepon> findByIdSize(UUID idsize) {
-        return sanPhamrepository.findByIdSize(idsize);
+    public Page<SanPhamRepon> finByNameDanhMuc(Integer pageNumber, Integer pageSize, String tendanhmuc) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return sanPhamrepository.finByNameDanhMuc(pageable, tendanhmuc);
     }
 
     @Override
-    public List<SanPhamRepon> findByNameSP(String tensp) {
-        return sanPhamrepository.findByNameSP(tensp);
+    public List<SizeShopRepon> getAllBySizeTrangThai() {
+        return sanPhamrepository.getAllBySizeTrangthai();
+    }
+
+    @Override
+    public Page<SanPhamRepon> findByNameSize(Integer pageNumber, Integer pageSize, String tensize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return sanPhamrepository.findByNameSize(pageable , tensize);
+    }
+
+    @Override
+    public List<SanPhamRepon> findByNameSP(Integer pageNumber, Integer pageSize, String tensp) {
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return sanPhamrepository.findByNameSP(pageable,tensp);
+    }
+
+    @Override
+    public List<MauSacShopRepon> getAllByMauSacTrangthai() {
+        return sanPhamrepository.getAllByMauSacTrangthai();
+    }
+
+    @Override
+    public Page<SanPhamRepon> findByMauSac(Integer pageNumber, Integer pageSize, String tenmausac) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return sanPhamrepository.findByMauSac(pageable , tenmausac);
+    }
+
+    @Override
+    public Page<SanPhamRepon> findBySPGiaBan(Integer pageNumber, Integer pageSize, Double key1, Double key2) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return sanPhamrepository.findByGiaSP(pageable,key1,key2);
     }
 }

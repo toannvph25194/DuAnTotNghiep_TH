@@ -39,7 +39,7 @@ public class Create_Khach_Hang_Not_login {
 
     private Double tienThua;
 
-    private Integer phuongThuongThanhToan;
+    private Integer phuongThucThanhToan;
 
     private List<UUID> gioHangChiTietList;
 

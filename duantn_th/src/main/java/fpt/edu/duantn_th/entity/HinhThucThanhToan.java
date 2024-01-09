@@ -23,9 +23,9 @@ public class HinhThucThanhToan {
     @Column(name = "id")
     private UUID idhtthanhtoan;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ngaythanhtoan")
-    Date ngaythanhtoan = new Date();
+    private Date ngaythanhtoan;
 
     @Column(name = "sotientra")
     private Double sotientra;
@@ -38,6 +38,13 @@ public class HinhThucThanhToan {
 
     @Column(name = "trangthai")
     private Integer trangthai;
+
+    @Column(name = "magiaodich")
+    private String magiaodich;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "ngaycapnhat")
+    private Date ngaycapnhat;
 
     //Máp với đơn hàng N-1
     @ManyToOne

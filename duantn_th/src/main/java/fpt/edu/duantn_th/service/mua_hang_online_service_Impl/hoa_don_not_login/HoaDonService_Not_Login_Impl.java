@@ -12,6 +12,7 @@ import fpt.edu.duantn_th.service.mua_hang_online_service.hoa_don_not_login.HoaDo
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
@@ -118,17 +119,17 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
         donHangRepository_not_login.save(hoadon);
 
         // Sử Lý Hình Thức Thanh Toán
-        HinhThucThanhToan hinhthucTT = new HinhThucThanhToan();
-        hinhthucTT.setIdhtthanhtoan(UUID.randomUUID());
-        hinhthucTT.setHoadon(hoadon);
-        hinhthucTT.setUsers(khachhang);
-        hinhthucTT.setNgaythanhtoan(timestamp);
-        hinhthucTT.setSotientra(create_khach_hang_not_login.getTongTien());
-        hinhthucTT.setPhuongthucthanhtoan(create_khach_hang_not_login.getPhuongThuongThanhToan());
-        hinhthucTT.setGhichu("OK");
-        hinhthucTT.setTrangthai(1);
+        if (create_khach_hang_not_login.getPhuongThucThanhToan() == 1){
+            HinhThucThanhToan hinhthucTT = new HinhThucThanhToan();
+            hinhthucTT.setIdhtthanhtoan(UUID.randomUUID());
+            hinhthucTT.setHoadon(hoadon);
+            hinhthucTT.setNgaythanhtoan(new Date(System.currentTimeMillis()));
+            hinhthucTT.setSotientra(create_khach_hang_not_login.getTongTien());
+            hinhthucTT.setPhuongthucthanhtoan(create_khach_hang_not_login.getPhuongThucThanhToan());
+            hinhthucTT.setTrangthai(1);
+            hinhThucThanhToanRepository.save(hinhthucTT);
+        }
 
-        hinhThucThanhToanRepository.save(hinhthucTT);
 
         //Step3 : Xử lí hóa đơn chi tiết
         for (UUID idGioHangCT : create_khach_hang_not_login.getGioHangChiTietList()){
@@ -182,6 +183,6 @@ public class HoaDonService_Not_Login_Impl implements HoaDonNot_Login_Service {
 
         }
 
-        return MessageThanhToanRepon_not_login.builder().message("Thanh Toán Thành Công").build();
+        return MessageThanhToanRepon_not_login.builder().message("Thanh Toán Thành Công").idhoadon(hoadon.getIdhoadon()).build();
     }
 }

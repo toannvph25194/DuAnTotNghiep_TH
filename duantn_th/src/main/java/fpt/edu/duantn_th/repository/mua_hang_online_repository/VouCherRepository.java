@@ -11,6 +11,6 @@ import java.util.UUID;
 public interface VouCherRepository extends JpaRepository<VouCher, UUID> {
 
     @Query(value = "SELECT Id,MaVouCher,TenVouCher,NgayKetThuc,SoLuongMa,SoLuongDung,GiaTriToiThieuHoaDon,GiaTriGiam,HinhThucGiam FROM VOUCHER\n" +
-            "WHERE TrangThai = 1 AND SoLuongMa > SoLuongDung",nativeQuery = true)
+            "WHERE TrangThai = 1 AND SoLuongMa > SoLuongDung AND GETDATE() >= NgayBatDau AND NgayKetThuc >= GETDATE() ",nativeQuery = true)
     List<VouCherOnlineRepon> getALlVouCher();
 }

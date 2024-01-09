@@ -1,5 +1,6 @@
 package fpt.edu.duantn_th.service.mua_hang_online_service_Impl.hoa_don_dang_nhap;
 
+import fpt.edu.duantn_th.dto.request.mua_hang_online_request.dangnhap.Create_Hinh_Thuc_TT_DangNhap;
 import fpt.edu.duantn_th.dto.request.mua_hang_online_request.dangnhap.Create_Khach_Hang_Dang_Nhap;
 import fpt.edu.duantn_th.dto.respon.mua_hang_online_respon.dangnhap.MessageThanhToanDangNhapRepon;
 import fpt.edu.duantn_th.entity.*;
@@ -11,7 +12,9 @@ import fpt.edu.duantn_th.service.mua_hang_online_service.hoa_don_dang_nhap.HoaDo
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.security.Principal;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.Random;
@@ -86,17 +89,16 @@ public class HoaDonDangNhapServiceImpl implements HoaDonDangNhapService {
                 hoaDonDangNhapRepository.save(hoadon);
 
                 // Sử Lý Hình Thức Thanh Toán
-                HinhThucThanhToan hinhthucTT = new HinhThucThanhToan();
-                hinhthucTT.setIdhtthanhtoan(UUID.randomUUID());
-                hinhthucTT.setHoadon(hoadon);
-                hinhthucTT.setUsers(khachHang);
-                hinhthucTT.setNgaythanhtoan(timestamp);
-                hinhthucTT.setSotientra(khachHangDangNhap.getTongTien());
-                hinhthucTT.setPhuongthucthanhtoan(khachHangDangNhap.getPhuongThucThanhToan());
-                hinhthucTT.setGhichu("OK");
-                hinhthucTT.setTrangthai(1);
-
-                hinhThucThanhToanRepository.save(hinhthucTT);
+                if (khachHangDangNhap.getPhuongThucThanhToan() == 1){
+                    HinhThucThanhToan hinhthucTT = new HinhThucThanhToan();
+                    hinhthucTT.setIdhtthanhtoan(UUID.randomUUID());
+                    hinhthucTT.setHoadon(hoadon);
+                    hinhthucTT.setNgaythanhtoan(new Date(System.currentTimeMillis()));
+                    hinhthucTT.setSotientra(khachHangDangNhap.getTongTien());
+                    hinhthucTT.setPhuongthucthanhtoan(khachHangDangNhap.getPhuongThucThanhToan());
+                    hinhthucTT.setTrangthai(1);
+                    hinhThucThanhToanRepository.save(hinhthucTT);
+                }
 
                 //Step3 : Xử lí hóa đơn chi tiết
                 for (UUID idGioHangCT : khachHangDangNhap.getGioHangChiTietList()) {
@@ -149,10 +151,28 @@ public class HoaDonDangNhapServiceImpl implements HoaDonDangNhapService {
                     }
 
                 }
-                return MessageThanhToanDangNhapRepon.builder().message("Thanh Toán Thành Công").build();
+                return MessageThanhToanDangNhapRepon.builder().message("Thanh Toán Thành Công").idhoadon(hoadon.getIdhoadon()).build();
             }else {
                 return MessageThanhToanDangNhapRepon.builder().message("Người Dùng Chưa Đăng Nhâp").build();
             }
 
+    }
+
+    @Override
+    public HinhThucThanhToan hinhThucTT(UUID idhoadon, Double soTienTra, String maGiaoDinh) {
+
+        HoaDon hoaDon = hoaDonDangNhapRepository.findById(idhoadon).get();
+
+        HinhThucThanhToan hinhThucThanhToan = new HinhThucThanhToan();
+        hinhThucThanhToan.setIdhtthanhtoan(UUID.randomUUID());
+        hinhThucThanhToan.setNgaythanhtoan(new Date(System.currentTimeMillis()));
+        hinhThucThanhToan.setSotientra(soTienTra);
+        hinhThucThanhToan.setPhuongthucthanhtoan(2);
+        hinhThucThanhToan.setMagiaodich(maGiaoDinh);
+        hinhThucThanhToan.setHoadon(hoaDon);
+        hinhThucThanhToan.setTrangthai(1);
+        hinhThucThanhToanRepository.save(hinhThucThanhToan);
+
+        return hinhThucThanhToan;
     }
 }
